@@ -18,11 +18,19 @@ html {
 	position: fixed;
 	display: inline-block;
 	float: left;
+	z-index: 99;
 }
 .main_pane{
 	margin-left: 20%;
 	width: 80%;
 	display: inline-block;
+	/*overflow-x:hidden;
+	overflow-y:auto;
+	height: 540px;*/
+	z-index: 99;
+}
+.other_details{
+	
 }
 ul{
 	padding: 0;
@@ -75,4 +83,29 @@ ul li:last-child{
 .content h4{
 	font-size: 1em;
 	font-weight: 700;
+}
+/*
+.container{
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  background: rgba(255,255,255, 0.2);
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+}*/
+
+#myCanvas{
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	left: 0;
 }
