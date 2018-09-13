@@ -1,0 +1,78 @@
+body{
+	padding: 0;
+	margin: 0;
+	font-family: 'Ubuntu Mono', monospace;
+	color: white;
+}
+
+html {
+  background: radial-gradient(circle, #115f5a, #15545a, #214854, #2a3d49, #2d333b) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.side_pane{
+	width: 20%;
+	position: fixed;
+	display: inline-block;
+	float: left;
+}
+.main_pane{
+	margin-left: 20%;
+	width: 80%;
+	display: inline-block;
+}
+ul{
+	padding: 0;
+	box-sizing: border-box;
+	margin-right: 15px;
+	margin-left: 15px;
+}
+
+ul li a{
+	color: white;
+	text-decoration: none;
+}
+ul li{
+	list-style: none;
+	padding: 5px;
+	font-size: 1em;
+	margin-bottom: 1px;
+	overflow: none;
+	background: rgba(255,255,255,0.2);
+}
+ul li:first-child{
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+ul li:last-child{
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+.timeline{
+	width: 100%;
+	box-sizing: border-box;
+	margin-left: 10px;
+	border-left: 2px solid white;
+	padding-left: 10px;
+	position: relative;
+}
+
+.content::before{
+	content: '';
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  position: absolute;
+	left: -6px;
+}
+
+.content h4{
+	font-size: 1em;
+	font-weight: 700;
+}
