@@ -24,9 +24,9 @@ function Dot(x, y, ctx){
 		ctx.closePath();
 	};
 
-	this.check = function(dot){
+	this.check = function(dot, distance){
 		var d = dist(this.x, this.y, dot.x, dot.y);
-		if (d < 200) {
+		if (d < distance) {
 			ctx.beginPath();
 			ctx.moveTo(this.x, this.y);
 			ctx.lineTo(dot.x, dot.y);

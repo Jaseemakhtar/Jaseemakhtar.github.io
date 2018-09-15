@@ -5,7 +5,8 @@
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"> 
-	<link rel="stylesheet" type="text/css" href="./styles/style.css">
+	<link rel="stylesheet" type="text/css" href="./styles/style.css" media="screen and (min-device-width:501px) and (max-device-width:2000px)">
+  <link rel="stylesheet" type="text/css" href="./styles/mobile.css" media="screen and (min-device-width: 320px) and (max-device-width: 500px)">
 </head>
 <body>
   
@@ -13,9 +14,11 @@
   </canvas>
 
 	<header>
-    <ul>
-      <li><h2>Jaseemakhtar <span style="background: #343D46; border-radius: 4px; padding: 4px;"> In Beta</span></h2></li>
+    <ul class="action_bar_web">
+      <li> <h2>Jaseemakhtar <span style="background: #343D46; border-radius: 4px; padding: 4px;"> In Beta</span></h2></li>
     </ul>
+
+    <h2 class="action_bar_mobile">Jaseemakhtar <span style="background: #343D46; border-radius: 4px; padding: 4px;"> In Beta</span></h2>
   		
 	</header>
 	<section>
@@ -30,8 +33,8 @@
   
   		<article class="main_pane">
     		<ul class="other_details">
-          <li>
-            <h2>Education</h2>
+          <li class="title">
+            <h2 class="section_title">Education</h2> <img src="./assets/next_button.svg" class="button" />
           </li>
           <li>
             <div class="timeline">
