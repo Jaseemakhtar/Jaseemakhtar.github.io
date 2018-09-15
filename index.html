@@ -5,8 +5,12 @@
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"> 
-	<link rel="stylesheet" type="text/css" href="./styles/style.css" media="screen and (min-device-width:501px) and (max-device-width:2000px)">
-  <link rel="stylesheet" type="text/css" href="./styles/mobile.css" media="screen and (min-device-width: 320px) and (max-device-width: 500px)">
+
+  <link rel="stylesheet" media="only screen and (min-width: 320px) and (max-width: 479px)" type="text/css" href="./styles/mobile.css">
+  <link rel="stylesheet" media="only screen and (min-width: 480px) and (max-width: 767px)" type="text/css" href="./styles/tablet.css">
+  <link rel="stylesheet" media="only screen and (min-width: 768px) and (max-width: 991px)" type="text/css" href="./styles/style.css">
+  <link rel="stylesheet" media="only screen and (min-width: 992px) and (max-width: 1999px)" type="text/css" href="./styles/style.css">
+
 </head>
 <body>
   
@@ -15,28 +19,56 @@
 
 	<header>
     <ul class="action_bar_web">
-      <li> <h2>Jaseemakhtar <span style="background: #343D46; border-radius: 4px; padding: 4px;"> In Beta</span></h2></li>
+      <li> <h2 class="nav_title">Hey, I am Jaseemakhtar</h2></li>
     </ul>
 
-    <h2 class="action_bar_mobile">Jaseemakhtar <span style="background: #343D46; border-radius: 4px; padding: 4px;"> In Beta</span></h2>
+    <h2 class="action_bar_mobile ">Jaseemakhtar <span style="background: #343D46; border-radius: 4px; padding: 4px;"> In Beta</span></h2>
   		
 	</header>
 	<section>
   		<nav class="side_pane">
-    		<ul class="personal_details">
-            <li><h3>Personal Details</h3></li>
-      			<li><a href="#"><span align="center"><img src="./assets/baseline-calendar_today-24px.svg"></span> March 10 1996</a></li>
-      			<li><a href="#"><span><img src="./assets/baseline-place-24px.svg"></span> India, Karnataka, Gokak</a></li>
-      			<li><a href="#"><span><img src="./assets/baseline-contact_mail-24px.svg"></span> Google Plus</a></li>
+    		<ul class="personal_details links_section">
+            <li><h3 class="section_title">Personal Details</h3></li>
+      			<li><img src="./assets/baseline-calendar_today-24px.svg"><span> March 10 1996</span></li>
+      			<li><img src="./assets/baseline-place-24px.svg"><span> India, Karnataka, Gokak</span></li>
+      			<li><a href="https://plus.google.com/u/0/112376243408482559214"><img src="./assets/baseline-contact_mail-24px.svg"><span> Google Plus</span></a></li>
     		</ul>
+        
+          <ul  class="links_section">
+            <li>
+              <a id="btn_skills" href="#"><img src="./assets/baseline-settings-20px.svg"> <span>Skills</span></a>
+            </li>
+            <li>
+              <a id="btn_edu" href="#"><img src="./assets/baseline-book-24px.svg"> <span>Education</span></a>
+            </li>
+            <li>
+              <a id="btn_proj" href="#"><img src="./assets/baseline-apps-24px.svg"> <span>Projects</span></a>
+            </li>
+            <li>
+              <a id="btn_exp" href="#"><img src="./assets/baseline-stars-24px.svg"> <span>Experience</span></a>
+            </li>
+          </ul>
   		</nav>
   
   		<article class="main_pane">
+
     		<ul class="other_details">
-          <li class="title">
-            <h2 class="section_title">Education</h2> <img src="./assets/next_button.svg" class="button" />
+           <li class="title">
+            <h2 class="section_title">About</h2>
           </li>
           <li>
+            <h2>
+              I am an App Developer, who is smart enough to handle EXCEPTIONS!. :)
+              And my friends call me H4CK3R.
+              Love towards computers, electronic gadgets is since from childhood.
+              Beside all this techy stuff, I am a Honest,Trustworthy & Optimistic.
+            </h2>
+          </li>
+
+          <li class="title" id="section_1">
+            <h2 class="section_title">Education</h2> <img src="./assets/next_button.svg" class="button" />
+          </li>
+          <li id="section_2">
             <div class="timeline">
               <div class="content">
                 <h3>2018</h3>
@@ -52,35 +84,12 @@
               </div>
             </div>
           </li>
-          <li>
-            <h2>Technical Skills</h2>
-          </li>
-          <li>
-            <div class="timeline">
-              <div class="content">
-                <h3>Kotlin</h3>
-              </div>
-              <div class="content">
-                <h3>WEB (Node.js)</h3>
-              </div>
-              <div class="content">
-                <h3>Android App Development</h3>
-              </div>
-              <div class="content">
-                <h3>Java</h3>
-              </div>
-              <div class="content">
-                <h3>C#</h3>
-              </div>
-              <div class="content">
-                <h3>C++</h3>
-              </div>
-              <div class="content">
-                <h3>C</h3>
-              </div>
-            </div>
-          </li>
+          
+          
+         
         </ul>
+
+        </section>
   		</article>
 	</section>
 

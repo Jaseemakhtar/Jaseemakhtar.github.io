@@ -13,9 +13,61 @@ var button = document.querySelector(".button");
 var titleSection = document.querySelector(".section_title");
 var detailSection = document.querySelector(".other_details");
 
+var btnEdu = document.querySelector("#btn_edu");
+var btnSkills = document.querySelector("#btn_skills");
+var btnExp = document.querySelector("#btn_exp");
+var btnProj = document.querySelector("#btn_proj");
+
+btnEdu.addEventListener('click',function(){
+	ajaxCall("./links/education.html");
+})
+
+btnSkills.addEventListener('click',function(){
+	ajaxCall("./links/skills.html");
+})
+
+btnExp.addEventListener('click',function(){
+	ajaxCall("./links/experience.html");
+})
+
+btnProj.addEventListener('click',function(){
+	ajaxCall("./links/projects.html");
+})
+
 button.addEventListener('click',function(){
-	console.log("Clicked");
+	ajaxCall("./links/education.html");
 });
+
+
+function ajaxCall(url){
+	var request;
+	if (window.XMLHttpRequest) {
+// code for modern browsers
+   request = new XMLHttpRequest();
+} else {
+// code for old IE browsers
+   request = new ActiveXObject("Microsoft.XMLHTTP");
+} 
+                            
+request.open('GET',url);
+request.onreadystatechange = function(){
+	if (this.readyState == 4 && this.status == 200) {                                 
+		var response = request.responseText;
+		var parser = new DOMParser();
+		var doc = parser.parseFromString(response,"text/html");
+		var sec1 = doc.getElementById("section_1");
+		var sec2 = doc.getElementById("section_2");
+
+		document.getElementById("section_1").remove();
+		document.getElementById("section_2").remove();
+
+		detailSection.append(sec1);
+		detailSection.append(sec2);
+
+	}
+}
+request.send();
+}
 
 if (window.innerWidth < 500) {
 	n = 9;	
