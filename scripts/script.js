@@ -1,31 +1,125 @@
-var requestAnimationFrame;
-var canvas;
-var ctx;
-var width;
-var height;
+var requestAnimationFrame,
+	canvas,
+	ctx,
+	width,
+	height,
+	dots = [],
+	n = 15,
+	dist = 200,
+	open = false,
+	lis = document.querySelectorAll("nav > ul > li"),
+	menu = document.querySelector("ul"), 
+	hamburger = document.querySelector("img"),
+	btnContactMe = document.querySelector('#contactme'),
+	btnHome = document.querySelector('#btnHome'),
+	btnContact = document.querySelector('#btnContact'),
+	btnEducation = document.querySelector('#btnEducation'),
+	btnProjects = document.querySelector('#btnProjects'),
+	btnSkills = document.querySelector('#btnSkills'),
+	mainMenu = document.querySelector('main');
 
-var dots = [];
-var n = 15;
-var dist = 200;
+var count = -1, current;
 
-var menu = document.querySelector("ul"), 
-	hamburger = document.querySelector("img")
-    ;
+btnContactMe.addEventListener('click',function(e){
+	current = 4;
+	setClicked();
+	ajaxCall("./links/contact.html");
+});
 
-var open = false;
+btnHome.addEventListener('click',function(e){
+	current = 0;
+	setClicked();
+	ajaxCall("./links/home.html");
+});
+btnContact.addEventListener('click',function(e){
+	current = 4;
+	setClicked();
+	ajaxCall("./links/contact.html");
+});
+btnEducation.addEventListener('click',function(e){
+	current = 1;
+	setClicked();
+	ajaxCall("./links/education.html");
+});
+btnProjects.addEventListener('click',function(e){
+	current = 3;
+	setClicked();
+	ajaxCall("./links/projects.html");
+});
+btnSkills.addEventListener('click',function(e){
+	current = 2;
+	setClicked();
+	ajaxCall("./links/skills.html");
+});
+
+function setClicked(){
+	for(var i=0; i < lis.length; i++){
+		count++;
+		if(lis[i].classList.contains("clicked")){
+			lis[i].classList.remove("clicked");
+		}
+		if(count == current){
+			lis[i].classList.add("clicked");
+		}
+	}
+
+	count = -1;
+}
 
 hamburger.addEventListener('click',function(e){
     if(open){
-        menu.style.display = "none";
-        open = false;
+		closeMenu();
     }else{
-        menu.style.display = "block";
-        open = true;
+		openMenu();
     }
-    
-    menu.classList.add('active');
-        e.preventDefault();
+    e.preventDefault();
 });
+
+function openMenu(){
+	menu.style.display = "block";
+	menu.classList.toggle('active');
+	hamburger.src = "./assets/baseline-close-24px.svg";
+    open = true;
+}
+
+function closeMenu(){
+	menu.style.display = "none";
+	menu.classList.toggle('active');
+	hamburger.src = "./assets/baseline-menu-24px.svg";
+    open = false;
+}
+
+function ajaxCall(url){
+	var request;
+	if (window.XMLHttpRequest) {
+		// code for modern browsers
+   		request = new XMLHttpRequest();
+	} else {
+		// code for old IE browsers
+   		request = new ActiveXObject("Microsoft.XMLHTTP");
+	} 
+                            
+	request.open('GET',url);
+	request.onreadystatechange = function(){
+		if (this.readyState == 4 && this.status == 200) {                                 
+			var response = request.responseText;
+			var parser = new DOMParser();
+			var doc = parser.parseFromString(response,"text/html");
+			
+			while (mainMenu.hasChildNodes()) {
+    			mainMenu.removeChild(mainMenu.lastChild);
+			}
+			mainMenu.appendChild(doc.querySelector('section'));
+		}
+		if(window.innerWidth < 767){
+			if(menu.classList.contains("active")){
+				closeMenu();
+			}
+		}
+		
+	}
+	request.send();
+}
 
 function setup(){
 	requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame 
