@@ -62,7 +62,6 @@ function setClicked(){
 			lis[i].classList.add("clicked");
 		}
 	}
-
 	count = -1;
 }
 
@@ -108,6 +107,14 @@ function ajaxCall(url){
 			
 			while (mainMenu.hasChildNodes()) {
     			mainMenu.removeChild(mainMenu.lastChild);
+			}
+
+			if(doc.querySelector('#contactme')){
+				doc.querySelector('#contactme').addEventListener('click',function(e){
+					current = 4;
+					setClicked();
+					ajaxCall("./links/contact.html");
+				});
 			}
 			mainMenu.appendChild(doc.querySelector('section'));
 		}
