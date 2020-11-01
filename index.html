@@ -9,13 +9,23 @@
     <link rel="stylesheet" media="only screen and (min-width: 768px) and (max-width: 1980px)" type="text/css" href="./styles/big.css">
     
     <title>Jaseem Portfolio</title>
+    <script>
+        const LEFT   = 1,
+            TOP    = 2,
+            RIGHT  = 3,
+            DOWN   = 4;
+    </script>
 </head>
 <body>
-    <canvas id="canvasDNA" width="400" height="600"></canvas>
+    <div class="canvasContainer">
+        <canvas id="canvasDNA" width="400" height="600"></canvas>
+        <canvas id="canvasSnake" width="400" height="600"></canvas>
+    </div>
     <div class="container">
         <div class="profile">
             <img id="imageProfile" src="./assets/profile.jpg" alt="profile.pic" >
-            <p class="mainText">Hello, I'm Jaseem</p>
+            <p class="mainText">Jaseem Akhtar</p>
+            <p class="mainText">MCA</p>
         </div>
         
             <!-- <aside>
@@ -67,6 +77,7 @@
     </div>
     <script type="text/javascript" src="./scripts/Utils.js"></script>
     <script type="text/javascript" src="./scripts/Dot.js"></script>
+    <script type="text/javascript" src="./scripts/snake.js"></script>
     <script type="text/javascript" src="./scripts/script.js"></script>
 </body>
 </html>

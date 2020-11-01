@@ -1,13 +1,20 @@
 window.onload = function() {
 	let requestAnimationFrame,
-		canvas,
-		ctx,
+		canvasDNA,
+		canvasSnake,
+		ctxDNA,
+		ctxSnake,
 		width,
 		height,
 		dots = [],
 		n = 22,
 		dist = 320,
-		open = false;
+		requestId,
+		cancelAnimationFrame,
+		open = false,
+		tile = 20,
+		snake,
+		updatedTime;
 	// 	lis = document.querySelectorAll("nav > ul > li"),
 	// 	menu = document.querySelector("ul"), 
 	// 	hamburger = document.querySelector("img"),
@@ -59,7 +66,7 @@ window.onload = function() {
 			if(lis[i].classList.contains("clicked")){
 				lis[i].classList.remove("clicked");
 			}
-			if(count == current){
+			if(count === current){
 				lis[i].classList.add("clicked");
 			}
 		}
@@ -101,7 +108,7 @@ window.onload = function() {
 								
 		request.open('GET',url);
 		request.onreadystatechange = function(){
-			if (this.readyState == 4 && this.status == 200) {                                 
+			if (this.readyState === 4 && this.status === 200) {
 				let response = request.responseText;
 				let parser = new DOMParser();
 				let doc = parser.parseFromString(response,"text/html");
@@ -129,38 +136,62 @@ window.onload = function() {
 		request.send();
 	}
 
-	function setup() {
-		requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame 
-		|| window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-		canvas = document.getElementById("canvasDNA");
-		ctx = canvas.getContext("2d");
+	function setupEnvironment() {
+		requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame
+			|| window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+		cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+
+		canvasDNA = document.getElementById("canvasDNA");
+		ctxDNA = canvasDNA.getContext("2d");
+
+		canvasSnake = document.getElementById('canvasSnake');
+		ctxSnake = canvasSnake.getContext('2d');
+	}
+
+	function setupCanvasAndSystem() {
 		width = window.innerWidth;
 		height = window.innerHeight;
 		
-		canvas.width = width;
-		canvas.height = height;
-		
-		for (let i = 0; i < n; i++) {
+		canvasDNA.width = width;
+		canvasDNA.height = height;
+
+		canvasSnake.width = width;
+		canvasSnake.height = height;
+
+		snake = new Snake((width / tile) / 2, (height / tile) / 2, ctxSnake, tile, width / tile);
+		updatedTime = Date.now();
+		/*for (let i = 0; i < n; i++) {
 			let offset = 14;
 			let x = getRandomIntFromInterval(offset, width - offset);
 			let y = getRandomIntFromInterval(offset, height - offset);
-			let dot = new Dot(x, y, ctx);
+			let dot = new Dot(x, y, ctxDNA, width, height);
 			dots.push(dot);
-		}
+		}*/
 	}
 
 	function draw(){
-			ctx.clearRect(0,0, width, height);
-			for(let i=0; i<dots.length; i++){
-				for(let j=0; j<dots.length; j++){
-					if (i != j) {
-						dots[j].check(dots[i], dist);
-					}
+		/*ctxDNA.clearRect(0,0, width, height);
+		for(let i=0; i<dots.length; i++){
+			for(let j=0; j<dots.length; j++){
+				if (i !== j) {
+					dots[j].check(dots[i], dist);
 				}
-				dots[i].show();
-				dots[i].update();
 			}
-		requestAnimationFrame(draw);
+			dots[i].show();
+			dots[i].update();
+		}*/
+		let currentTime = Date.now();
+		if ((currentTime - updatedTime) >= 200) {
+			ctxSnake.clearRect(0, 0, width, height);
+			snake.update();
+			snake.show();
+			let probabilityToTurn = Math.random() > 0.7;
+			if (probabilityToTurn) {
+				snake.move(getRandomIntFromInterval(1, 4));
+			}
+			updatedTime = currentTime;
+		}
+		requestId = requestAnimationFrame(draw);
 	}
 
 	if (window.innerWidth < 767) {
@@ -168,6 +199,14 @@ window.onload = function() {
 		dist = 130;
 	}
 
-	setup();
+	window.addEventListener('resize', (ev => {
+		dots.length = 0
+		cancelAnimationFrame(requestId)
+		setupCanvasAndSystem()
+		draw()
+	}))
+
+	setupEnvironment()
+	setupCanvasAndSystem();
 	draw();
 }

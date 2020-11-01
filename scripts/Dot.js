@@ -1,9 +1,11 @@
 class Dot{
 	
-	constructor(x, y, ctx) {
+	constructor(x, y, ctx, innerWidth, innerHeight) {
 		this.x = x;
 		this.y = y;
 		this.ctx = ctx;
+		this.innerWidth = innerWidth;
+		this.innerHeight = innerHeight
 		this.radius = Math.floor(getRandomIntFromInterval(4, 9));
 		this.directionX = Math.random() < 0.5 ? -1 : 1;
 		this.directionY = Math.random() < 0.5 ? -1 : 1;
@@ -15,11 +17,11 @@ class Dot{
 	update() {
 		this.x += this.xSpeed;
 		this.y += this.ySpeed;
-		if (this.x < 0 || this.x > window.innerWidth - this.radius * 2) {
-			this.xSpeed *= -1;
+		if (this.x < this.radius || this.x > this.innerWidth - this.radius) {
+			this.xSpeed = -this.xSpeed;
 		}
-		if (this.y < 0 || this.y > window.innerHeight - this.radius) {
-			this.ySpeed *= -1;
+		if (this.y < this.radius || this.y > this.innerHeight - this.radius) {
+			this.ySpeed = -this.xSpeed;
 		}
 	}
 
@@ -37,7 +39,7 @@ class Dot{
 			this.ctx.beginPath();
 			this.ctx.moveTo(this.x, this.y);
 			this.ctx.lineTo(dot.x, dot.y);
-			this.ctx.strokeStyle = `rgba(255,255,255,${this.alpha})`;
+			this.ctx.strokeStyle = `rgba(255,255,255,${1 - (d / distance)})`;
 			this.ctx.stroke();
 			this.ctx.closePath();
 		}
