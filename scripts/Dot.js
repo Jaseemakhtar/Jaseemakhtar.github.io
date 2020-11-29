@@ -1,45 +1,58 @@
-function Dot(x, y, ctx){
-	this.x = x;
-	this.y = y;
-	this.radius = 1;
-	this.plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-	this.xSpeed = (Math.random() * 0.5 + 0.1) * this.plusOrMinus;
-	this.ySpeed = (Math.random() * 0.5 + 0.1) * this.plusOrMinus;
-	this.update = function(){
+class Dot{
+	
+	constructor(x, y, ctx, innerWidth, innerHeight) {
+		this.x = x;
+		this.y = y;
+		this.ctx = ctx;
+		this.radius = Math.floor(getRandomIntFromInterval(3, 9));
+		this.directionX = Math.random() < 0.5 ? -1 : 1;
+		this.directionY = Math.random() < 0.5 ? -1 : 1;
+		this.xSpeed = getRandomArbitrary(0.1, 0.8) * this.directionX;
+		this.ySpeed = getRandomArbitrary(0.1, 0.8) * this.directionY;
+		this.alpha = getRandomArbitrary(0.1, 0.3);
+		this.connections = []
+	}
+
+	update() {
 		this.x += this.xSpeed;
 		this.y += this.ySpeed;
-		if (this.x < 0 || this.x > width - this.radius * 2) {
+		if (this.x < this.radius || this.x > window.innerWidth - this.radius) {
 			this.xSpeed *= -1;
 		}
-		if (this.y < 0 || this.y > height - this.radius) {
+		if (this.y < this.radius || this.y > window.innerHeight - this.radius) {
 			this.ySpeed *= -1;
 		}
-	};
+	}
 
-	this.show = function(){
-		ctx.beginPath();
-		ctx.arc(this.x, this.y, 4 * 2, 0, Math.PI * 2, false);
-		ctx.fillStyle = "rgba(255,255,255,0.4)";
-		ctx.fill();
-		ctx.closePath();
-	};
+	show() {
+		this.ctx.beginPath();
+		this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+		this.ctx.fillStyle = `rgba(255,255,255,${this.alpha})`;
+		this.ctx.fill();
+		this.ctx.closePath();
+	}
 
-	this.check = function(dot, distance){
-		var d = dist(this.x, this.y, dot.x, dot.y);
-		if (d < distance) {
-			ctx.beginPath();
-			ctx.moveTo(this.x, this.y);
-			ctx.lineTo(dot.x, dot.y);
-			ctx.strokeStyle = "rgba(255,255,255,0.2)";
-			ctx.stroke();
-			ctx.closePath();
+	check(dot, distance) {
+		let d = this.dist(this.x, this.y, dot.x, dot.y);
+		if (d <= distance) {
+				let gradient = this.ctx.createLinearGradient(this.x, this.y, dot.x, dot.y);
+				gradient.addColorStop(0, `rgba(255, 255, 255, ${this.alpha})`);
+				gradient.addColorStop(1,`rgba(255, 255, 255, ${dot.alpha})` );
+	
+				this.ctx.beginPath();
+				this.ctx.moveTo(this.x, this.y);
+				this.ctx.lineTo(dot.x, dot.y);
+				this.ctx.strokeStyle = gradient
+				this.ctx.stroke();
+				this.ctx.closePath();
+				this.connections.push(dot)
+			
 		}
-	};
+	}
 
-	function dist(x1, y1, x2, y2){
-		var a = Math.abs(x1 - x2);
-		var b = Math.abs(y1 - y2);
-		var c = Math.sqrt( a*a + b*b );
-		return c;
+	dist(x1, y1, x2, y2){
+		let a = Math.abs(x1 - x2);
+		let b = Math.abs(y1 - y2);
+		return Math.sqrt(a * a + b * b);
 	}
 }

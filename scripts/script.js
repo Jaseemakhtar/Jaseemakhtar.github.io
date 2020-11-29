@@ -1,170 +1,171 @@
-var requestAnimationFrame,
-	canvas,
-	ctx,
-	width,
-	height,
-	dots = [],
-	n = 15,
-	dist = 200,
-	open = false,
-	lis = document.querySelectorAll("nav > ul > li"),
-	menu = document.querySelector("ul"), 
-	hamburger = document.querySelector("img"),
-	btnContactMe = document.querySelector('#contactme'),
-	btnHome = document.querySelector('#btnHome'),
-	btnContact = document.querySelector('#btnContact'),
-	btnEducation = document.querySelector('#btnEducation'),
-	btnProjects = document.querySelector('#btnProjects'),
-	btnSkills = document.querySelector('#btnSkills'),
-	mainMenu = document.querySelector('main');
+window.onload = function() {
+	const IMAGE_INDEX = 0,
+		  DIV_INDEX = 1;
+		  CANVAS_PARTICLES = 0,
+		  CANVAS_GAME = 1;
 
-var count = -1, current;
+	let requestAnimationFrame,
+		requestId,
+		canvasParticles,
+		canvasGame,
+		ctxParticles,
+		ctxGame,
+		width,
+		height,
+		dots = [],
+		n = 22,
+		dist = 260,
+		snake,
+		tile = 20,
+		updatedTime,
+		pageIndicators = document.querySelectorAll('.indicator'),
+		contactTypes = document.querySelectorAll('.contact-icon');
 
-btnContactMe.addEventListener('click',function(e){
-	current = 4;
-	setClicked();
-	ajaxCall("./links/contact.html");
-});
+	let canvasType = CANVAS_PARTICLES;
 
-btnHome.addEventListener('click',function(e){
-	current = 0;
-	setClicked();
-	ajaxCall("./links/home.html");
-});
-btnContact.addEventListener('click',function(e){
-	current = 4;
-	setClicked();
-	ajaxCall("./links/contact.html");
-});
-btnEducation.addEventListener('click',function(e){
-	current = 1;
-	setClicked();
-	ajaxCall("./links/education.html");
-});
-btnProjects.addEventListener('click',function(e){
-	current = 3;
-	setClicked();
-	ajaxCall("./links/projects.html");
-});
-btnSkills.addEventListener('click',function(e){
-	current = 2;
-	setClicked();
-	ajaxCall("./links/skills.html");
-});
+	pageIndicators[0].addEventListener('click', (evt => {
+		toggleCanvas()
+		toggleIndicator(canvasType)
+	}));
 
-function setClicked(){
-	for(var i=0; i < lis.length; i++){
-		count++;
-		if(lis[i].classList.contains("clicked")){
-			lis[i].classList.remove("clicked");
+	pageIndicators[1].addEventListener('click', (evt => {
+		toggleCanvas()
+		toggleIndicator(canvasType)
+	}));
+
+	contactTypes[0].addEventListener('click', (e => {
+		openHyperLink("https://github.com/Jaseemakhtar")
+	}))
+
+	contactTypes[1].addEventListener('click', (e => {
+		openHyperLink("https://t.me/Jaseemakhtar")
+	}))
+
+	contactTypes[2].addEventListener('click', (e => {
+		openHyperLink("https://mail.google.com/mail/?view=cm&fs=1&to=jaseemamaljeri@gmail.com")
+	}))
+
+	function openHyperLink(link) {
+		window.open(link, '_blank');
+	}
+
+	function toggleCanvas() {
+		cancelAnimationFrame(requestId)
+
+		if (canvasType == CANVAS_GAME) {
+			canvasType = CANVAS_PARTICLES
+		} else {
+			canvasType = CANVAS_GAME
 		}
-		if(count == current){
-			lis[i].classList.add("clicked");
+
+		canvasGame.classList.toggle('hidden')
+		canvasParticles.classList.toggle('hidden')
+
+		draw()
+	}
+
+	function toggleIndicator(index) {
+		pageIndicators[index].children[IMAGE_INDEX].classList.remove('hidden')
+		pageIndicators[index].children[DIV_INDEX].classList.add('glow')
+
+		if (index === 0) {
+			pageIndicators[1].children[IMAGE_INDEX].classList.add('hidden')
+			pageIndicators[1].children[DIV_INDEX].classList.remove('glow')
+		} else {
+			pageIndicators[0].children[IMAGE_INDEX].classList.add('hidden')
+			pageIndicators[0].children[DIV_INDEX].classList.remove('glow')
 		}
 	}
-	count = -1;
-}
 
-hamburger.addEventListener('click',function(e){
-    if(open){
-		closeMenu();
-    }else{
-		openMenu();
-    }
-    e.preventDefault();
-});
-
-function openMenu(){
-	menu.style.display = "block";
-	menu.classList.toggle('active');
-	hamburger.src = "./assets/baseline-close-24px.svg";
-    open = true;
-}
-
-function closeMenu(){
-	menu.style.display = "none";
-	menu.classList.toggle('active');
-	hamburger.src = "./assets/baseline-menu-24px.svg";
-    open = false;
-}
-
-function ajaxCall(url){
-	var request;
-	if (window.XMLHttpRequest) {
-		// code for modern browsers
-   		request = new XMLHttpRequest();
-	} else {
-		// code for old IE browsers
-   		request = new ActiveXObject("Microsoft.XMLHTTP");
-	} 
-                            
-	request.open('GET',url);
-	request.onreadystatechange = function(){
-		if (this.readyState == 4 && this.status == 200) {                                 
-			var response = request.responseText;
-			var parser = new DOMParser();
-			var doc = parser.parseFromString(response,"text/html");
-			
-			while (mainMenu.hasChildNodes()) {
-    			mainMenu.removeChild(mainMenu.lastChild);
-			}
-
-			if(doc.querySelector('#contactme')){
-				doc.querySelector('#contactme').addEventListener('click',function(e){
-					current = 4;
-					setClicked();
-					ajaxCall("./links/contact.html");
-				});
-			}
-			mainMenu.appendChild(doc.querySelector('section'));
-		}
-		if(window.innerWidth < 767){
-			if(menu.classList.contains("active")){
-				closeMenu();
-			}
-		}
+	function setupEnvironment() {
+		requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame 
+		|| window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
 		
-	}
-	request.send();
-}
+		canvasParticles = document.getElementById("canvasParticles")
+		canvasGame = document.getElementById("canvasGame")
 
-function setup(){
-	requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame 
-	|| window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-	canvas = document.getElementById("myCanvas");
-	ctx = canvas.getContext("2d");
-	width = window.innerWidth;
-	height = window.innerHeight;
-	
-	canvas.width = width;
-	canvas.height = height;
-	
-	for(var i = 0; i < n; i++){
-		var x = (Math.random() * (width - 8)) + 8;
-		var y = (Math.random() * (height - 8)) + 8;
-		var dot = new Dot(x, y, ctx);
-		dots.push(dot);
+		ctxParticles = canvasParticles.getContext("2d")
+		ctxGame = canvasGame.getContext("2d")
 	}
-}
 
-function draw(){
-		ctx.clearRect(0,0, width, height);
-		for(var i=0; i<dots.length; i++){
-			for(var j=0; j<dots.length; j++){
+	function setupCanvas() {
+		width = window.innerWidth
+		height = window.innerHeight
+		
+		canvasParticles.width = width
+		canvasParticles.height = height
+
+		canvasGame.width = width
+		canvasGame.height = height
+		
+		snake = new Snake((width / tile) / 2, (height / tile) / 2, ctxGame, tile, width / tile)
+		updatedTime = Date.now()
+
+		for (let i = 0; i < n; i++) {
+			let offset = 14
+			let x = getRandomIntFromInterval(offset, width - offset)
+			let y = getRandomIntFromInterval(offset, height - offset)
+			let dot = new Dot(x, y, ctxParticles)
+			dots.push(dot)
+		}
+	}
+
+	function draw(){
+		if (canvasType == CANVAS_PARTICLES) {
+			drawParticles()
+		} else {
+			drawGame()
+		}
+	}
+
+	function drawParticles() {
+		ctxParticles.clearRect(0,0, width, height)
+		for(let i=0; i<dots.length; i++){
+			for(let j=0; j<dots.length; j++){
 				if (i != j) {
-					dots[j].check(dots[i], dist);
+					dots[j].check(dots[i], dist)
 				}
 			}
-			dots[i].show();
-			dots[i].update();
+			dots[i].show()
+			dots[i].update()
 		}
-	requestAnimationFrame(draw);
-}
+		requestId = requestAnimationFrame(drawParticles)
+	}
 
-if (window.innerWidth < 767) {
-	n = 9;	
-	dist = 130;
-}
+	function drawGame() {
+		let currentTime = Date.now()
 
-setup();
-draw();
+		if ((currentTime - updatedTime) >= 200) {
+			ctxGame.clearRect(0, 0, width, height)
+			
+			snake.update()
+			snake.show()
+
+			let probabilityToTurn = Math.random() > 0.7
+
+			if (probabilityToTurn) {
+				snake.move(getRandomIntFromInterval(1, 4))
+			}
+
+			updatedTime = currentTime
+		}
+
+		requestId = requestAnimationFrame(drawGame)
+	}
+
+	if (window.innerWidth < 767) {
+		n = 16;	
+		dist = 160;
+	}
+
+	window.addEventListener('resize', (ev => {
+		dots.length = 0
+		cancelAnimationFrame(requestId)
+		setupCanvas()
+		draw()
+	}))
+
+	setupEnvironment()
+	setupCanvas()
+	draw()
+}
