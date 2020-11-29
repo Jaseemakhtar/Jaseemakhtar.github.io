@@ -4,21 +4,22 @@ class Dot{
 		this.x = x;
 		this.y = y;
 		this.ctx = ctx;
-		this.radius = Math.floor(getRandomIntFromInterval(4, 9));
+		this.radius = Math.floor(getRandomIntFromInterval(3, 9));
 		this.directionX = Math.random() < 0.5 ? -1 : 1;
 		this.directionY = Math.random() < 0.5 ? -1 : 1;
 		this.xSpeed = getRandomArbitrary(0.1, 0.8) * this.directionX;
 		this.ySpeed = getRandomArbitrary(0.1, 0.8) * this.directionY;
-		this.alpha = getRandomArbitrary(0.1, 0.4);
+		this.alpha = getRandomArbitrary(0.1, 0.3);
+		this.connections = []
 	}
 
 	update() {
 		this.x += this.xSpeed;
 		this.y += this.ySpeed;
-		if (this.x < 0 || this.x > window.innerWidth - this.radius * 2) {
+		if (this.x < this.radius || this.x > window.innerWidth - this.radius) {
 			this.xSpeed *= -1;
 		}
-		if (this.y < 0 || this.y > window.innerHeight - this.radius) {
+		if (this.y < this.radius || this.y > window.innerHeight - this.radius) {
 			this.ySpeed *= -1;
 		}
 	}
@@ -32,15 +33,23 @@ class Dot{
 	}
 
 	check(dot, distance) {
-		let d = this.dist(this.x, this.y, dot.x, dot.y);
-		if (d <= distance) {
-			this.ctx.beginPath();
-			this.ctx.moveTo(this.x, this.y);
-			this.ctx.lineTo(dot.x, dot.y);
-			this.ctx.strokeStyle = `rgba(255,255,255,${this.alpha})`;
-			this.ctx.stroke();
-			this.ctx.closePath();
-		}
+		
+			let d = this.dist(this.x, this.y, dot.x, dot.y);
+			if (d <= distance) {
+					let gradient = this.ctx.createLinearGradient(this.x, this.y, dot.x, dot.y);
+					gradient.addColorStop(0, `rgba(255, 255, 255, ${this.alpha})`);
+					gradient.addColorStop(1,`rgba(255, 255, 255, ${dot.alpha})` );
+		
+					this.ctx.beginPath();
+					this.ctx.moveTo(this.x, this.y);
+					this.ctx.lineTo(dot.x, dot.y);
+					this.ctx.strokeStyle = gradient
+					this.ctx.stroke();
+					this.ctx.closePath();
+					this.connections.push(dot)
+				
+			}
+		
 	}
 
 	dist(x1, y1, x2, y2){
