@@ -1,6 +1,6 @@
 class Dot{
 	
-	constructor(x, y, ctx) {
+	constructor(x, y, ctx, innerWidth, innerHeight) {
 		this.x = x;
 		this.y = y;
 		this.ctx = ctx;
@@ -33,23 +33,21 @@ class Dot{
 	}
 
 	check(dot, distance) {
-		
-			let d = this.dist(this.x, this.y, dot.x, dot.y);
-			if (d <= distance) {
-					let gradient = this.ctx.createLinearGradient(this.x, this.y, dot.x, dot.y);
-					gradient.addColorStop(0, `rgba(255, 255, 255, ${this.alpha})`);
-					gradient.addColorStop(1,`rgba(255, 255, 255, ${dot.alpha})` );
-		
-					this.ctx.beginPath();
-					this.ctx.moveTo(this.x, this.y);
-					this.ctx.lineTo(dot.x, dot.y);
-					this.ctx.strokeStyle = gradient
-					this.ctx.stroke();
-					this.ctx.closePath();
-					this.connections.push(dot)
-				
-			}
-		
+		let d = this.dist(this.x, this.y, dot.x, dot.y);
+		if (d <= distance) {
+				let gradient = this.ctx.createLinearGradient(this.x, this.y, dot.x, dot.y);
+				gradient.addColorStop(0, `rgba(255, 255, 255, ${this.alpha})`);
+				gradient.addColorStop(1,`rgba(255, 255, 255, ${dot.alpha})` );
+	
+				this.ctx.beginPath();
+				this.ctx.moveTo(this.x, this.y);
+				this.ctx.lineTo(dot.x, dot.y);
+				this.ctx.strokeStyle = gradient
+				this.ctx.stroke();
+				this.ctx.closePath();
+				this.connections.push(dot)
+			
+		}
 	}
 
 	dist(x1, y1, x2, y2){
