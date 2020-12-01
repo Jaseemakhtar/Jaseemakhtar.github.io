@@ -1,3 +1,51 @@
+:root {
+    --image-height: 14em;
+    --icon-size: 3.4em;
+    --icon-parent-width: 80%;
+    --text-name-size: 2.2em;
+    --text-desc-size: 1.1em;
+    --vertical-bar-size: 0.5em;
+    --page-indicator-margin-top: 2em;
+    --page-indicator-hud: 1.4em;
+    --page-indicator-dot: 0.6em;
+}
+
+@media (min-width: 420px) {
+    :root {
+        --image-height: 16em;
+        --icon-size: 4em;
+        --icon-parent-width: 80%;
+        --text-name-size: 2.8em;
+        --text-desc-size: 1.4em;
+        --page-indicator-hud: 1.6em;
+        --page-indicator-dot: 0.7em;
+    }
+}
+
+@media (min-width: 736px) {
+    :root {
+        --icon-size: 5em;
+        --icon-parent-width: 100%;
+        --text-name-size: 3em;
+        --text-desc-size: 1.6em;
+        --page-indicator-hud: 2em;
+        --page-indicator-dot: 0.9em;
+    }
+}
+
+@media (min-height: 736px) {
+    :root {
+        --page-indicator-margin-top: 8em;
+    }
+}
+
+@media (min-height: 812px) {
+    :root {
+        --page-indicator-margin-top: 14em;
+    }
+}
+
+
 html {
     background: radial-gradient(circle at center bottom, #3790d6, #2c71b2, #1f548e, #10386c, #001f4b) no-repeat center center fixed; 
     -webkit-background-size: cover;
@@ -31,7 +79,7 @@ body {
     display: flex;
 }
 #imageProfile {
-    height: 18em;
+    height: var(--image-height);
 }
 .bar {
     width: .5em;
@@ -86,7 +134,7 @@ body {
     transform: rotate(180deg);
 }
 .p-name {
-    font-size: 3em;
+    font-size: var(--text-name-size);
     font-weight: bold;
     color: white;
     margin: 0 1em 0 1em;
@@ -96,7 +144,7 @@ body {
     width: 80%;
 }
 .p-desc {
-    font-size: 1.5em;
+    font-size: var(--text-desc-size);
     font-weight: 600;
     color: white;
     margin: 0;
@@ -116,12 +164,12 @@ body {
 .contacts {
     margin-top: 2em;
     display: flex;
-    width: 100%;
+    width: var(--icon-parent-width);
     justify-content: space-between;
 }
 .contact-icon {
-    width: 5em;
-    height: 5em;
+    width: var(--icon-size);
+    height: var(--icon-size);
     position: relative;
     overflow: hidden;
     display: flex;
@@ -149,7 +197,7 @@ body {
     width: 48%;
 }
 .page-indicator {
-    margin-top: 6em;
+    margin-top: var(--page-indicator-margin-top);
     display: flex;
     width: 6em;
     justify-content: space-between;
@@ -164,15 +212,15 @@ body {
 }
 .indicator-dot {
     position: absolute;
-    height: .8em;
-    width: .8em;
+    height: var(--page-indicator-dot);
+    width: var(--page-indicator-dot);
     border-radius: 50%;
     margin: 1em;
     background-color: #ffcd8b;
 }
 .indicator img {
-    width: 2em;
-    height: 2em;
+    width: var(--page-indicator-hud);
+    height: var(--page-indicator-hud);
     position: absolute;
     animation: rotateHud 1s ease-in infinite alternate;
 }
