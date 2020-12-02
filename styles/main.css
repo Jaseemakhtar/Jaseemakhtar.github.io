@@ -180,12 +180,19 @@ body {
     position: absolute;
     height: 100%;
     opacity: .8;
+    transition: 200ms;
 }
 .contact-icon:hover img:first-child {
     opacity: 1;
+    cursor: pointer;
+    -webkit-filter: drop-shadow(0px 0px 2px rgba(80, 190, 252, 0.8));
+    filter: drop-shadow(0px 0px 2px rgba(80, 190, 252, 0.8));
 }
 .contact-icon img:nth-child(2) {
     position: absolute;
+}
+.contact-icon img:nth-child(2):hover {
+    cursor: pointer;
 }
 .contact-icon:nth-child(1) img:nth-child(2) {
     width: 60%;
@@ -222,7 +229,13 @@ body {
     width: var(--page-indicator-hud);
     height: var(--page-indicator-hud);
     position: absolute;
-    animation: rotateHud 1s ease-in infinite alternate;
+    animation: initHUD 300ms ease-in, rotateHud 1s 300ms ease-in infinite alternate;
+}
+.indicator-dot:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 5px 0px #ffbe6a;
+    -moz-box-shadow:    0px 0px 5px 0px  #ffbe6a;
+    box-shadow:         0px 0px 5px 0px #ffbe6a;
 }
 .glow {
     -webkit-box-shadow: 0px 0px 5px 0px #ffbe6a;
@@ -230,16 +243,29 @@ body {
     box-shadow:         0px 0px 5px 0px #ffbe6a;
 }
 .hidden {
-    visibility: hidden;
+    display: none;
+}
+@keyframes initHUD {
+    0% {
+        transform: scale(0.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 @keyframes rotateHud {
     0% {
-        transform: rotate(0deg);
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(90deg) scale(1.08);
     }
 
     100% {
-        transform: rotate(180deg);
+        transform: rotate(180deg) scale(1);
     }
 }
 /* .contact-icon:hover {
