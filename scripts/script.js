@@ -6,10 +6,8 @@ window.onload = function() {
 
 	let requestAnimationFrame,
 		requestId,
-		canvasParticles,
-		canvasGame,
-		ctxParticles,
-		ctxGame,
+		canvasMain,
+		ctxMain,
 		width,
 		height,
 		dots = [],
@@ -62,9 +60,6 @@ window.onload = function() {
 			canvasType = CANVAS_GAME
 		}
 
-		canvasGame.classList.toggle('hidden')
-		canvasParticles.classList.toggle('hidden')
-
 		draw()
 	}
 
@@ -85,22 +80,17 @@ window.onload = function() {
 		requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame 
 		|| window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
 		
-		canvasParticles = document.getElementById("canvasParticles")
-		canvasGame = document.getElementById("canvasGame")
+		canvasMain = document.getElementById("canvasMain")
 
-		ctxParticles = canvasParticles.getContext("2d")
-		ctxGame = canvasGame.getContext("2d")
+		ctxMain = canvasMain.getContext("2d")
 	}
 
 	function setupCanvas() {
 		width = window.innerWidth
 		height = window.innerHeight
 		
-		canvasParticles.width = width
-		canvasParticles.height = height
-
-		canvasGame.width = width
-		canvasGame.height = height
+		canvasMain.width = width
+		canvasMain.height = height
 
 		let widthRem = width % TILE_SIZE
 		let heightRem = height % TILE_SIZE
@@ -118,14 +108,14 @@ window.onload = function() {
 		tilesHorizontal = gameWidth / TILE_SIZE
 		tilesVertical = gameHeight / TILE_SIZE
 		
-		snake = new Snake(ctxGame, tilesHorizontal, tilesVertical)
+		snake = new Snake(ctxMain, tilesHorizontal, tilesVertical)
 		updatedTime = Date.now()
 
 		for (let i = 0; i < n; i++) {
 			let offset = 14
 			let x = getRandomIntFromInterval(offset, width - offset)
 			let y = getRandomIntFromInterval(offset, height - offset)
-			let dot = new Dot(x, y, ctxParticles)
+			let dot = new Dot(x, y, ctxMain)
 			dots.push(dot)
 		}
 	}
@@ -139,7 +129,7 @@ window.onload = function() {
 	}
 
 	function drawParticles() {
-		ctxParticles.clearRect(0,0, width, height)
+		ctxMain.clearRect(0,0, width, height)
 		for(let i=0; i<dots.length; i++){
 			for(let j=0; j<dots.length; j++){
 				if (i != j) {
@@ -156,7 +146,7 @@ window.onload = function() {
 		let currentTime = Date.now()
 
 		if ((currentTime - updatedTime) >= 200) {
-			ctxGame.clearRect(0, 0, width, height)
+			ctxMain.clearRect(0, 0, width, height)
 			
 			snake.update()
 			snake.show()
