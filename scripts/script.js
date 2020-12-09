@@ -16,12 +16,16 @@ window.onload = function() {
 		n = 22,
 		dist = 260,
 		snake,
-		tile = 20,
+		tilesVertical = 0,
+		tilesHorizontal = 0,
 		updatedTime,
 		pageIndicators = document.querySelectorAll('.indicator'),
 		contactTypes = document.querySelectorAll('.contact-icon');
 
 	let canvasType = CANVAS_PARTICLES;
+
+	let paddingHorizontal = 0,
+		paddingVertical = 0;
 
 	pageIndicators[0].addEventListener('click', (evt => {
 		toggleCanvas()
@@ -97,8 +101,24 @@ window.onload = function() {
 
 		canvasGame.width = width
 		canvasGame.height = height
+
+		let widthRem = width % TILE_SIZE
+		let heightRem = height % TILE_SIZE
+		let gameWidth = width
+		let gameHeight = height
+
+		if (widthRem != 0) {
+			gameWidth = width - widthRem
+		}
+
+		if (heightRem != 0) {
+			gameHeight = height - heightRem
+		}
+
+		tilesHorizontal = gameWidth / TILE_SIZE
+		tilesVertical = gameHeight / TILE_SIZE
 		
-		snake = new Snake((width / tile) / 2, (height / tile) / 2, ctxGame, tile, width / tile)
+		snake = new Snake(ctxGame, tilesHorizontal, tilesVertical)
 		updatedTime = Date.now()
 
 		for (let i = 0; i < n; i++) {

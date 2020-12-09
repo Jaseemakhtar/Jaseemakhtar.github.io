@@ -1,35 +1,41 @@
 class Snake {
-    constructor(x, y, ctx, tile, totalTiles) {
+    constructor(ctx, tilesHorizontal, tilesVertical) {
+        this.ctx = ctx
+        this.tilesHorizontal = tilesHorizontal
+        this.tilesVertical = tilesVertical
+        this.init()
+    }
+
+    init() {
+        let x = getRandomIntFromInterval(1, this.tilesHorizontal)
+        let y = getRandomIntFromInterval(1, this.tilesVertical)
         this.body = [
-                {
-                    x: x,
-                    y: y
-                },
-                {
-                    x: x - 1,
-                    y: y
-                },
-                {
-                    x: x - 2, 
-                    y: y
-                },
-                {
-                    x: x - 3, 
-                    y: y
-                }
-            ];
+            {
+                x: x,
+                y: y
+            },
+            {
+                x: x - 1,
+                y: y
+            },
+            {
+                x: x - 2, 
+                y: y
+            },
+            {
+                x: x - 3, 
+                y: y
+            }
+        ];
         this.xSpeed = 1;
         this.ySpeed = 0;
         this.direction = RIGHT;
-        this.ctx = ctx
-        this.tile = tile
-        this.totalTiles = totalTiles
     }
 
     show(){
         for (let i = 0; i < this.body.length; i++) {
             this.ctx.fillStyle = `rgba(255, 255, 255, 0.4)`
-            this.ctx.fillRect(this.body[i].x * this.tile + 2, this.body[i].y * this.tile + 2, this.tile - 2 , this.tile - 2)
+            this.ctx.fillRect(this.body[i].x * TILE_SIZE + 2, this.body[i].y * TILE_SIZE + 2, TILE_SIZE - 2 , TILE_SIZE - 2)
         }
     }
 
@@ -47,27 +53,27 @@ class Snake {
         let newX = this.body[0].x
         let newY = this.body[0].y
 
-        if (this.body[0].x > this.totalTiles - 1) {
-            newX = -1
-        }
-        if (this.body[0].x < 0) {
-            newX = this.totalTiles
-        }
-        if (this.body[0].y > this.totalTiles - 1) {
-            newY = -1
-        }
-        if (this.body[0].y < 0) {
-            newY = this.totalTiles
-        }
         newX += this.xSpeed
         newY += this.ySpeed
+
+        if (newX > this.tilesHorizontal) {
+            newX = 1
+        }
+        if (newX < 1) {
+            newX = this.tilesHorizontal
+        }
+        if (newY > this.tilesVertical) {
+            newY = 1
+        }
+        if (newY < 1) {
+            newY = this.tilesVertical
+        }
         
         this.body.unshift({x: newX, y: newY})
         this.body.pop();
     }
 
     move(dir){
-        
         switch(dir){
             case LEFT:
                 if (this.direction != RIGHT) {
