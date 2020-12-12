@@ -1,8 +1,9 @@
 class Snake {
-    constructor(ctx, tilesHorizontal, tilesVertical) {
+    constructor(ctx, tilesHorizontal, tilesVertical, paddings) {
         this.ctx = ctx
         this.tilesHorizontal = tilesHorizontal
         this.tilesVertical = tilesVertical
+        this.paddings = paddings
         this.init()
     }
 
@@ -35,7 +36,12 @@ class Snake {
     show(){
         for (let i = 0; i < this.body.length; i++) {
             this.ctx.fillStyle = `rgba(255, 255, 255, 0.4)`
-            this.ctx.fillRect(this.body[i].x * TILE_SIZE + 2, this.body[i].y * TILE_SIZE + 2, TILE_SIZE - 2 , TILE_SIZE - 2)
+            this.ctx.fillRect(
+                ((this.body[i].x * TILE_SIZE + 2) - TILE_SIZE) + this.paddings[0], 
+                ((this.body[i].y * TILE_SIZE + 2) - TILE_SIZE) + this.paddings[1], 
+                TILE_SIZE - 2 , 
+                TILE_SIZE - 2
+            )
         }
     }
 

@@ -10,16 +10,17 @@ class Dot{
 		this.xSpeed = getRandomArbitrary(0.1, 0.8) * this.directionX;
 		this.ySpeed = getRandomArbitrary(0.1, 0.8) * this.directionY;
 		this.alpha = getRandomArbitrary(0.1, 0.3);
-		this.connections = []
+		this.canvasWidth = innerWidth
+		this.canvasHeight = innerHeight
 	}
 
 	update() {
 		this.x += this.xSpeed;
 		this.y += this.ySpeed;
-		if (this.x < this.radius || this.x > window.innerWidth - this.radius) {
+		if (this.x < this.radius || this.x > this.innerWidth - this.radius) {
 			this.xSpeed *= -1;
 		}
-		if (this.y < this.radius || this.y > window.innerHeight - this.radius) {
+		if (this.y < this.radius || this.y > this.innerHeight - this.radius) {
 			this.ySpeed *= -1;
 		}
 	}
@@ -32,9 +33,9 @@ class Dot{
 		this.ctx.closePath();
 	}
 
-	check(dot, distance) {
-		let d = this.dist(this.x, this.y, dot.x, dot.y);
-		if (d <= distance) {
+	check(dot, dist) {
+		let d = distance(this.x, this.y, dot.x, dot.y)
+		if (d <= dist) {
 				let gradient = this.ctx.createLinearGradient(this.x, this.y, dot.x, dot.y);
 				gradient.addColorStop(0, `rgba(255, 255, 255, ${this.alpha})`);
 				gradient.addColorStop(1,`rgba(255, 255, 255, ${dot.alpha})` );
@@ -45,14 +46,6 @@ class Dot{
 				this.ctx.strokeStyle = gradient
 				this.ctx.stroke();
 				this.ctx.closePath();
-				this.connections.push(dot)
-			
 		}
-	}
-
-	dist(x1, y1, x2, y2){
-		let a = Math.abs(x1 - x2);
-		let b = Math.abs(y1 - y2);
-		return Math.sqrt(a * a + b * b);
 	}
 }
