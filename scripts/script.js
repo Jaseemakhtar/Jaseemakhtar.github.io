@@ -2,14 +2,13 @@ window.onload = function() {
 	const IMAGE_INDEX = 0,
 		  DIV_INDEX = 1;
 		  CANVAS_PARTICLES = 0,
-		  CANVAS_GAME = 1;
+		  CANVAS_SNAKE = 1,
+		  CANVAS_ASTEROIDS = 2;
 
 	let requestAnimationFrame,
 		requestId,
-		canvasParticles,
-		canvasGame,
-		ctxParticles,
-		ctxGame,
+		canvasMain,
+		ctxMain,
 		width,
 		height,
 		dots = [],
@@ -24,16 +23,29 @@ window.onload = function() {
 
 	let canvasType = CANVAS_PARTICLES;
 
-	let paddingHorizontal = 0,
-		paddingVertical = 0;
+	const ARROW_LEFT = "ArrowLeft"
+	const ARROW_RIGHT = "ArrowRight"
+	const ARROW_UP = "ArrowUp"
+	const SPACE = " "
+
+	const keyMaps = {[ARROW_LEFT]: false, [ARROW_UP]: false, [ARROW_RIGHT]: false, [SPACE]: false}
+
+	let spaceShip, asteroids = [];
+	let asteroidKeyControl = -1
+	let asteroidCount = 10
 
 	pageIndicators[0].addEventListener('click', (evt => {
-		toggleCanvas()
+		setCanvasType(CANVAS_PARTICLES)
 		toggleIndicator(canvasType)
 	}));
 
 	pageIndicators[1].addEventListener('click', (evt => {
-		toggleCanvas()
+		setCanvasType(CANVAS_SNAKE)
+		toggleIndicator(canvasType)
+	}));
+
+	pageIndicators[2].addEventListener('click', (evt => {
+		setCanvasType(CANVAS_ASTEROIDS)
 		toggleIndicator(canvasType)
 	}));
 
@@ -53,31 +65,21 @@ window.onload = function() {
 		window.open(link, '_blank');
 	}
 
-	function toggleCanvas() {
+	function setCanvasType(pos) {
 		cancelAnimationFrame(requestId)
-
-		if (canvasType == CANVAS_GAME) {
-			canvasType = CANVAS_PARTICLES
-		} else {
-			canvasType = CANVAS_GAME
-		}
-
-		canvasGame.classList.toggle('hidden')
-		canvasParticles.classList.toggle('hidden')
-
+		canvasType = pos
 		draw()
 	}
 
 	function toggleIndicator(index) {
-		pageIndicators[index].children[IMAGE_INDEX].classList.remove('hidden')
-		pageIndicators[index].children[DIV_INDEX].classList.add('glow')
-
-		if (index === 0) {
-			pageIndicators[1].children[IMAGE_INDEX].classList.add('hidden')
-			pageIndicators[1].children[DIV_INDEX].classList.remove('glow')
-		} else {
-			pageIndicators[0].children[IMAGE_INDEX].classList.add('hidden')
-			pageIndicators[0].children[DIV_INDEX].classList.remove('glow')
+		for (let i = 0; i < pageIndicators.length; i++) {
+			if (i == index) {
+				pageIndicators[index].children[IMAGE_INDEX].classList.remove('hidden')
+				pageIndicators[index].children[DIV_INDEX].classList.add('glow')
+			} else {
+				pageIndicators[i].children[IMAGE_INDEX].classList.add('hidden')
+				pageIndicators[i].children[DIV_INDEX].classList.remove('glow')
+			}
 		}
 	}
 
@@ -85,27 +87,27 @@ window.onload = function() {
 		requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame 
 		|| window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
 		
-		canvasParticles = document.getElementById("canvasParticles")
-		canvasGame = document.getElementById("canvasGame")
+		canvasMain = document.getElementById("canvasMain")
 
-		ctxParticles = canvasParticles.getContext("2d")
-		ctxGame = canvasGame.getContext("2d")
+		ctxMain = canvasMain.getContext("2d")
 	}
 
 	function setupCanvas() {
 		width = window.innerWidth
 		height = window.innerHeight
 		
-		canvasParticles.width = width
-		canvasParticles.height = height
-
-		canvasGame.width = width
-		canvasGame.height = height
+		canvasMain.width = width
+		canvasMain.height = height
 
 		let widthRem = width % TILE_SIZE
 		let heightRem = height % TILE_SIZE
 		let gameWidth = width
 		let gameHeight = height
+
+		spaceShip = new SpaceShip(ctxMain, 16, width, height)
+		for (let i = 0; i < asteroidCount; i++) {
+			asteroids.push(new Asteroid(ctxMain, 28, width, height))
+		}
 
 		if (widthRem != 0) {
 			gameWidth = width - widthRem
@@ -118,14 +120,14 @@ window.onload = function() {
 		tilesHorizontal = gameWidth / TILE_SIZE
 		tilesVertical = gameHeight / TILE_SIZE
 		
-		snake = new Snake(ctxGame, tilesHorizontal, tilesVertical)
+		snake = new Snake(ctxMain, tilesHorizontal, tilesVertical, [widthRem / 2, heightRem / 2])
 		updatedTime = Date.now()
 
 		for (let i = 0; i < n; i++) {
 			let offset = 14
 			let x = getRandomIntFromInterval(offset, width - offset)
 			let y = getRandomIntFromInterval(offset, height - offset)
-			let dot = new Dot(x, y, ctxParticles)
+			let dot = new Dot(x, y, ctxMain)
 			dots.push(dot)
 		}
 	}
@@ -133,13 +135,15 @@ window.onload = function() {
 	function draw(){
 		if (canvasType == CANVAS_PARTICLES) {
 			drawParticles()
+		} else if (canvasType == CANVAS_SNAKE){
+			drawSnake()
 		} else {
-			drawGame()
+			drawAsteroids()
 		}
 	}
 
 	function drawParticles() {
-		ctxParticles.clearRect(0,0, width, height)
+		ctxMain.clearRect(0,0, width, height)
 		for(let i=0; i<dots.length; i++){
 			for(let j=0; j<dots.length; j++){
 				if (i != j) {
@@ -152,11 +156,11 @@ window.onload = function() {
 		requestId = requestAnimationFrame(drawParticles)
 	}
 
-	function drawGame() {
+	function drawSnake() {
 		let currentTime = Date.now()
 
 		if ((currentTime - updatedTime) >= 200) {
-			ctxGame.clearRect(0, 0, width, height)
+			ctxMain.clearRect(0, 0, width, height)
 			
 			snake.update()
 			snake.show()
@@ -170,20 +174,69 @@ window.onload = function() {
 			updatedTime = currentTime
 		}
 
-		requestId = requestAnimationFrame(drawGame)
+		requestId = requestAnimationFrame(drawSnake)
 	}
 
-	if (window.innerWidth < 767) {
-		n = 16;	
-		dist = 160;
+	function drawAsteroids() {
+		ctxMain.clearRect(0, 0, width, height)
+		spaceShip.show()
+
+		let probabilityToTurn = Math.random() > 0.7
+
+		if (probabilityToTurn) {
+			asteroidKeyControl = getRandomIntFromInterval(1, 4)
+
+			switch (asteroidKeyControl) {
+				case 1:
+					spaceShip.turnLeft()
+					break
+	
+				case 2:
+					spaceShip.turnRight()
+					break
+	
+				case 3:
+					spaceShip.thrust()
+					break
+	
+				case 4:
+					spaceShip.fire()
+					break
+			}
+		}
+
+		spaceShip.update()
+
+		for (let i = 0; i < asteroids.length; i++) {
+			asteroids[i].show()
+			asteroids[i].update()
+			for (let j = 0; j < spaceShip.laser.length; j++) {
+				let d = distance(asteroids[i].posX, asteroids[i].posY, spaceShip.laser[j].posX, spaceShip.laser[j].posY)
+				if (d <= asteroids[i].radius + 2) {
+					asteroids.splice(i, 1)
+					spaceShip.laser.splice(j, 1)
+					asteroids.push(new Asteroid(ctxMain, 28, width, height))
+				}
+			}
+		}
+
+
+        requestId = requestAnimationFrame(drawAsteroids)
 	}
 
 	window.addEventListener('resize', (ev => {
 		dots.length = 0
+		asteroids.length = 0
 		cancelAnimationFrame(requestId)
 		setupCanvas()
 		draw()
 	}))
+
+	if (window.innerWidth < 767) {
+		n = 16
+		dist = 160
+		asteroidCount = 8
+	}
 
 	setupEnvironment()
 	setupCanvas()
