@@ -1,10 +1,4 @@
 window.onload = function() {
-	const IMAGE_INDEX = 0,
-		  DIV_INDEX = 1;
-		  CANVAS_PARTICLES = 0,
-		  CANVAS_SNAKE = 1,
-		  CANVAS_ASTEROIDS = 2;
-
 	let requestAnimationFrame,
 		requestId,
 		canvasMain,
@@ -21,14 +15,7 @@ window.onload = function() {
 		pageIndicators = document.querySelectorAll('.indicator'),
 		contactTypes = document.querySelectorAll('.contact-icon');
 
-	let canvasType = CANVAS_PARTICLES;
-
-	const ARROW_LEFT = "ArrowLeft"
-	const ARROW_RIGHT = "ArrowRight"
-	const ARROW_UP = "ArrowUp"
-	const SPACE = " "
-
-	const keyMaps = {[ARROW_LEFT]: false, [ARROW_UP]: false, [ARROW_RIGHT]: false, [SPACE]: false}
+	let canvasType = CANVAS_ASTEROIDS;
 
 	let spaceShip, asteroids = [];
 	let asteroidKeyControl = -1
@@ -36,17 +23,17 @@ window.onload = function() {
 
 	pageIndicators[0].addEventListener('click', (evt => {
 		setCanvasType(CANVAS_PARTICLES)
-		toggleIndicator(canvasType)
+		setIndicator(canvasType)
 	}));
 
 	pageIndicators[1].addEventListener('click', (evt => {
 		setCanvasType(CANVAS_SNAKE)
-		toggleIndicator(canvasType)
+		setIndicator(canvasType)
 	}));
 
 	pageIndicators[2].addEventListener('click', (evt => {
 		setCanvasType(CANVAS_ASTEROIDS)
-		toggleIndicator(canvasType)
+		setIndicator(canvasType)
 	}));
 
 	contactTypes[0].addEventListener('click', (e => {
@@ -71,7 +58,7 @@ window.onload = function() {
 		draw()
 	}
 
-	function toggleIndicator(index) {
+	function setIndicator(index) {
 		for (let i = 0; i < pageIndicators.length; i++) {
 			if (i == index) {
 				pageIndicators[index].children[IMAGE_INDEX].classList.remove('hidden')
@@ -212,7 +199,7 @@ window.onload = function() {
 			asteroids[i].update()
 			for (let j = 0; j < spaceShip.laser.length; j++) {
 				let d = distance(asteroids[i].posX, asteroids[i].posY, spaceShip.laser[j].posX, spaceShip.laser[j].posY)
-				if (d <= asteroids[i].radius + 2) {
+				if (d < asteroids[i].radius) {
 					asteroids.splice(i, 1)
 					spaceShip.laser.splice(j, 1)
 					asteroids.push(new Asteroid(ctxMain, 28, width, height))

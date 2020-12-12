@@ -11,7 +11,7 @@ class SpaceShip {
         this.posX = this.canvasWidth / 2
         this.posY = this.canvasHeight / 2
 
-        this.angle = radians(270)
+        this.angle = radians(getRandomIntFromInterval(0, 359))
 
         this.velX = 0
         this.velY = 0

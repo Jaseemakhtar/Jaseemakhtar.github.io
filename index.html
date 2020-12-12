@@ -13,7 +13,18 @@
         TOP = 2,
         RIGHT = 3,
         DOWN = 4,
-        TILE_SIZE = 20
+        TILE_SIZE = 20,
+        ARROW_LEFT = "ArrowLeft",
+        ARROW_RIGHT = "ArrowRight",
+        ARROW_UP = "ArrowUp",
+        SPACE = " ",
+        IMAGE_INDEX = 0,
+		DIV_INDEX = 1;
+		CANVAS_PARTICLES = 0,
+		CANVAS_SNAKE = 1,
+		CANVAS_ASTEROIDS = 2;
+
+        const keyMaps = {[ARROW_LEFT]: false, [ARROW_UP]: false, [ARROW_RIGHT]: false, [SPACE]: false}
     </script>
     <title>Jaseem Portfolio</title>
 </head>
@@ -89,16 +100,16 @@
 
         <div class="page-indicator">
             <div class="indicator">
+                <img class="hidden" src="./assets/hud_rings.svg" alt="hud">
+                <div class="indicator-dot"></div>
+            </div>
+            <div class="indicator">
+                <img class="hidden" src="./assets/hud_rings.svg" alt="hud">
+                <div class="indicator-dot"></div>
+            </div>
+            <div class="indicator">
                 <img src="./assets/hud_rings.svg" alt="hud">
                 <div class="indicator-dot glow"></div>
-            </div>
-            <div class="indicator">
-                <img class="hidden" src="./assets/hud_rings.svg" alt="hud">
-                <div class="indicator-dot"></div>
-            </div>
-            <div class="indicator">
-                <img class="hidden" src="./assets/hud_rings.svg" alt="hud">
-                <div class="indicator-dot"></div>
             </div>
         </div>
     </div>
