@@ -1,124 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@400;600;700&display=swap" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./styles/main.css">
-    <script> 
-        const LEFT = 1,
-        TOP = 2,
-        RIGHT = 3,
-        DOWN = 4,
-        TILE_SIZE = 20,
-        ARROW_LEFT = "ArrowLeft",
-        ARROW_RIGHT = "ArrowRight",
-        ARROW_UP = "ArrowUp",
-        SPACE = " ",
-        IMAGE_INDEX = 0,
-		DIV_INDEX = 1;
-		CANVAS_PARTICLES = 0,
-		CANVAS_SNAKE = 1,
-		CANVAS_ASTEROIDS = 2;
-
-        const keyMaps = {[ARROW_LEFT]: false, [ARROW_UP]: false, [ARROW_RIGHT]: false, [SPACE]: false}
-    </script>
-    <title>Jaseem Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaseem Akhtar</title>
+  <link rel="stylesheet" href="./styles/revamp_style.css" />
 </head>
 <body>
-    <canvas id="canvasMain" width="400" height="600"></canvas>
-    <div class="container">
+  <canvas id="bg"></canvas>
 
-        <div class="profile">
-            <div class="bar left"></div>
-            <img id="imageProfile" src="./assets/Pic.jpg" alt="profile.pic" >
-            <div class="bar right"></div>
+  <main>
+    <section class="hero">
+      <h2>&gt; Assalamualaikum, I'm</h2>
+      <h1>Jaseem Akhtar</h1>
+      <p>Senior Android Engineer | Graphics & Robotics Enthusiast</p>
+      <p class="tagline">Known for creating complex, mathematically advanced, non-standard UIs</p>
+    </section>
+
+    <!-- <section class="about">
+      <h2>&lt;About Me&gt;</h2>
+      <p>I'm a Senior Android Developer who loves working on custom UIs, canvas drawing, and motion. 
+         Beyond Android, I explore robotics, electronics, PCB design, and 3D modeling — 
+         basically, I love making things from scratch.</p>
+      <pre class="timeline">
+&gt; 2015 : Started Android development
+&gt; 2018 : Master's in Computer Applications
+&gt; 2022 : Senior Android Engineer
+&gt; 2024 : Built Quadruped Robot
+&gt; 2025 : Transitioning toward Robotics R&D
+      </pre>
+    </section> -->
+
+    <section class="projects">
+      <h2>&lt;Projects&gt;</h2>
+      <div class="project-grid">
+        <div class="card">
+          <h3>[ EXPERIMENT 01 ]</h3>
+          <p>CG Algorithms → Jetpack Compose + Canvas</p>
         </div>
-        
-        <div class="user-details">
-            <div class="user-name">
-                <div class="grid">
-                    <div>
-                        <img class="image-corner top-left" src="./assets/square_corner_2.svg" >
-                    </div>
-                    <div>
-                        <img class="image-corner top-right" src="./assets/square_corner_2.svg" >
-                    </div>
-                    <div>
-                        <img class="image-corner bottom-left" src="./assets/square_corner_2.svg" >
-                    </div>
-                    <div>
-                        <img class="image-corner bottom-right" src="./assets/square_corner_2.svg" >
-                    </div>
-                </div>
+        <div class="card">
+          <h3>[ EXPERIMENT 02 ]</h3>
+          <p>Quadruped Robot → ESP32 + PCB + 3D Printed Frame</p>
+        </div>
+        <div class="card">
+          <h3>[ EXPERIMENT 03 ]</h3>
+          <p>Robot App → Compose</p>
+        </div>
+      </div>
+    </section>
 
-                <p class="p-name">
-                    Jaseem Akhtar
-                </p>
-            </div>
+        <section class="gallery">
+      <h2>&lt;Project Gallery&gt;</h2>
+      <p class="gallery-intro">A few experiments — combining code, geometry, and creativity.</p>
 
-            <div class="user-prof">
-                <div class="grid">
-                    <div>
-                        <img class="image-corner top-left" src="./assets/square_corner_2.svg" >
-                    </div>
-                    <div>
-                        <img class="image-corner top-right" src="./assets/square_corner_2.svg" >
-                    </div>
-                    <div>
-                        <img class="image-corner bottom-left" src="./assets/square_corner_2.svg" >
-                    </div>
-                    <div>
-                        <img class="image-corner bottom-right" src="./assets/square_corner_2.svg" >
-                    </div>
-                </div>
+      <div class="gallery-grid">
 
-                <p class="p-desc">
-                    Android Developer <a href="#">@Quiph</a>
-                </p>
-            </div>
-
-            <div class="contacts">
-                <div class="contact-icon">
-                    <img src="./assets/hex_icon_bg.svg" alt="">
-                    <img class="image-main-icon" src="./assets/github_mark_120px_plus.png" alt="Git">
-                </div>
-                <div class="contact-icon">
-                    <img src="./assets/hex_icon_bg.svg" alt="">
-                    <img class="image-main-icon" src="./assets/telegram_icon.svg" alt="Git">
-                </div>
-                <div class="contact-icon">
-                    <img src="./assets/hex_icon_bg.svg" alt="">
-                    <img class="image-main-icon" src="./assets/gmail_icon_1280.png" alt="Git">
-                </div>
-            </div>
-
+        <!-- Robot images -->
+        <div class="gallery-item">
+          <img src="https://github.com/user-attachments/assets/6b888cfc-19aa-4a49-8376-ea0014f5e4c7" alt="Quadruped Robot 1" />
+          <span class="caption">Quadruped Robot — Design & Build</span>
+        </div>
+        <div class="gallery-item">
+          <img src="https://github.com/user-attachments/assets/ac9c79f1-ef52-4c09-a4ea-d8326a095db8" alt="Quadruped Robot 2" />
+          <span class="caption">ESP32 + 12 Servo PCB</span>
+        </div>
+        <div class="gallery-item">
+          <img src="https://github.com/user-attachments/assets/1f2c7d4e-8ce7-4601-a45d-9a96e8dff5a2" alt="Quadruped Robot 3" />
+          <span class="caption">3D Printed Frame + LED Eyes</span>
         </div>
 
-        <div class="page-indicator">
-            <div class="indicator">
-                <img class="hidden" src="./assets/hud_rings.svg" alt="hud">
-                <div class="indicator-dot"></div>
-            </div>
-            <div class="indicator">
-                <img class="hidden" src="./assets/hud_rings.svg" alt="hud">
-                <div class="indicator-dot"></div>
-            </div>
-            <div class="indicator">
-                <img src="./assets/hud_rings.svg" alt="hud">
-                <div class="indicator-dot glow"></div>
-            </div>
+        <!-- Graphics gifs -->
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/Jaseemakhtar/ComposeCG/main/art/Seipinsky_triangle.gif" alt="Sierpinski Triangle" />
+          <span class="caption">Sierpinski Triangle</span>
         </div>
-    </div>
-    <script type="text/javascript" src="./scripts/utils.js"></script>
-    <script type="text/javascript" src="./scripts/dot.js"></script>
-    <script type="text/javascript" src="./scripts/snake.js"></script>
-    <script type="text/javascript" src="./scripts/laser.js"></script>
-    <script type="text/javascript" src="./scripts/asteroid.js"></script>
-    <script type="text/javascript" src="./scripts/spaceship.js"></script>
-    <script type="text/javascript" src="./scripts/script.js"></script>
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/Jaseemakhtar/ComposeCG/main/art/Koch_curve.gif" alt="Koch Curve" />
+          <span class="caption">Koch Curve</span>
+        </div>
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/Jaseemakhtar/ComposeCG/main/art/Bezier_curve.gif" alt="Bezier Curve" />
+          <span class="caption">Bezier Curve</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="contact">
+      <h2>&lt;Connect&gt;</h2>
+      <div class="commands">
+        <a href="https://github.com/Jaseemakhtar" target="_blank">&gt; connect --github</a>
+        <a href="https://linkedin.com/in/jaseem-akhtar" target="_blank">&gt; connect --linkedin</a>
+        <a href="https://www.instagram.com/jaseemabit/" target="_blank">&gt; connect --instagram</a>
+        <a href="https://youtube.com/@jaseemabit" target="_blank">&gt; connect --youtube</a>
+      </div>
+    </section>
+
+    <footer>
+      &gt; Built by hand with HTML, CSS, JS <br />
+      &gt; Last update: 2025
+    </footer>
+  </main>
+
+  <script src="./scripts/revamp_script.js"></script>
 </body>
 </html>
