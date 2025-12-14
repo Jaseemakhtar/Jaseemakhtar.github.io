@@ -1,12 +1,10 @@
 // window.onload = () => {
-    // ==== Dynamic Math Grid Background ====
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
 let width, height, centerX, centerY;
 let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
 
-// Resize canvas dynamically
 function resize() {
   width = canvas.width = window.innerWidth;
   height = canvas.height = window.innerHeight;
@@ -16,18 +14,15 @@ function resize() {
 window.addEventListener("resize", resize);
 resize();
 
-// Track mouse movement
 window.addEventListener("mousemove", (e) => {
   mouse.targetX = e.clientX;
   mouse.targetY = e.clientY;
 });
 
-// Simple lerp (smooth interpolation)
 function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 
-// Draw grid lines
 function drawGrid(originX, originY, spacing = 50) {
   ctx.strokeStyle = "rgba(0, 255, 240, 0.1)";
   ctx.lineWidth = 1;
@@ -53,7 +48,6 @@ function drawGrid(originX, originY, spacing = 50) {
     ctx.stroke();
   }
 
-  // Draw central axes
   ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
   ctx.lineWidth = 1.2;
   ctx.beginPath();
@@ -64,7 +58,6 @@ function drawGrid(originX, originY, spacing = 50) {
   ctx.stroke();
 }
 
-// Draw orbiting math points
 const particles = Array.from({ length: 20 }, (_, i) => ({
   r: 80 + i * 8,
   a: Math.random() * Math.PI * 2,
@@ -83,9 +76,7 @@ function drawParticles(originX, originY) {
   });
 }
 
-// Main animation loop
 function animate() {
-  // Smooth mouse interpolation
   mouse.x = lerp(mouse.x, mouse.targetX, 0.05);
   mouse.y = lerp(mouse.y, mouse.targetY, 0.05);
 
