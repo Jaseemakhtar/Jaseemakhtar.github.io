@@ -77,8 +77,8 @@ function drawParticles(originX, originY) {
 }
 
 function animate() {
-  mouse.x = lerp(mouse.x, mouse.targetX, 0.05);
-  mouse.y = lerp(mouse.y, mouse.targetY, 0.05);
+  mouse.x = lerp(mouse.x, mouse.targetX, 0.04);
+  mouse.y = lerp(mouse.y, mouse.targetY, 0.04);
 
   ctx.clearRect(0, 0, width, height);
   const originX = lerp(centerX, mouse.x, 0.2);

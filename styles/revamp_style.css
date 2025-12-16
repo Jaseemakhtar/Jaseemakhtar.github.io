@@ -172,3 +172,51 @@ footer {
 .gallery-item:hover .caption {
   opacity: 1;
 }
+
+.about-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #ddd;
+}
+
+.about-header {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.profile-photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00fff0;
+  margin-bottom: 1rem;
+}
+
+.about-header h1 {
+  color: #00fff0;
+  margin-bottom: 2rem;
+}
+
+.about-content p {
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  color: #ccc;
+}
+
+.inline-image {
+  width: 100%;
+  border-radius: 8px;
+  margin: 2rem 0;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.inline-video {
+  width: 100%;
+  border-radius: 8px;
+  margin: 2rem 0;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
