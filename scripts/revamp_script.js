@@ -58,8 +58,8 @@ function drawGrid(originX, originY, spacing = 50) {
   ctx.stroke();
 }
 
-const particles = Array.from({ length: 20 }, (_, i) => ({
-  r: 80 + i * 8,
+const particles = Array.from({ length: 40 }, (_, i) => ({
+  r: 70 + i * 7,
   a: Math.random() * Math.PI * 2,
   speed: 0.002 + i * 0.0002,
 }));
@@ -67,8 +67,10 @@ const particles = Array.from({ length: 20 }, (_, i) => ({
 function drawParticles(originX, originY) {
   particles.forEach((p) => {
     p.a += p.speed;
+    
     const x = originX + Math.cos(p.a) * p.r;
     const y = originY + Math.sin(p.a * 1.2) * p.r * 0.5;
+
     ctx.beginPath();
     ctx.arc(x, y, 2, 0, Math.PI * 2);
     ctx.fillStyle = "rgba(0,255,240,0.8)";
