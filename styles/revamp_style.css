@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
 
+:root {
+  --primary-color: #0cbdcf;
+  --primary-bg-color: #0a0a0a;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -30,7 +35,7 @@ main > section {
 canvas#bg {
   position: fixed;
   top: 0;
-  background: #0a0a0a;
+  background: var(--primary-bg-color);
   left: 0;
   width: 100%;
   height: 100%;
@@ -42,7 +47,6 @@ canvas#bg {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0rem 4rem;
   gap: 2rem;
   top: 0;
   height: 100dvh;
@@ -53,7 +57,7 @@ canvas#bg {
 }
 
 .hero-role {
-  background-color: #26a1fb;
+  background-color: var(--primary-color);
   color: #fff;
   padding: 0px 0.6rem;
   clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
@@ -86,8 +90,8 @@ canvas#bg {
 }
 
 .hero h1 {
-  font-size: 4.5rem;
-  color: #26a1fb;
+  font-size: 3.6rem;
+  color: var(--primary-color);
 }
 
 .tagline {
@@ -99,7 +103,7 @@ canvas#bg {
 .section-header {
   padding: 1rem 0.6rem;
   margin: 0;
-  color: #00fff0;
+  color: var(--primary-color);
 }
 
 .projects {
@@ -134,7 +138,6 @@ canvas#bg {
   .hero {
     flex-direction: column-reverse;
     text-align: center;
-    padding: 2rem 3rem;
   }
 
   .hero-left {
@@ -142,7 +145,7 @@ canvas#bg {
   }
 
   .hero-left h1 {
-    font-size: 3rem;
+    font-size: 2.6rem;
   }
 
   .hero-right {
