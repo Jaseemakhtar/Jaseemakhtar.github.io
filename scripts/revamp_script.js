@@ -1,8 +1,12 @@
 window.onload = () => {
   const canvas = document.getElementById("bg");
   const ctx = canvas.getContext("2d");
+  const main = document.querySelector("main");
+  
+  const maxScroll = main.scrollHeight - main.clientHeight;
+  const maxGridMove = -7;
 
-  let width, height, centerX, centerY;
+  let width, height, centerX, centerY, originX, originY;
   let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
 
   window.addEventListener("resize", resize);
@@ -25,7 +29,7 @@ window.onload = () => {
   }
 
   function drawGrid(originX, originY, spacing = 50) {
-    ctx.strokeStyle = "rgba(0, 255, 240, 0.1)";
+    ctx.strokeStyle = "rgba(12, 189, 207, 0.1)";
     ctx.lineWidth = 1;
 
     const cols = Math.ceil(width / spacing) + 2;
@@ -65,16 +69,30 @@ window.onload = () => {
     speed: 0.002 + i * 0.0002,
   }));
 
+  const tilt = Math.PI / 8;
+  const cosT = Math.cos(tilt);
+  const sinT = Math.sin(tilt);
+  const depth = 0.4;
+  
+
   function drawParticles(originX, originY) {
     particles.forEach((p) => {
       p.a += p.speed;
 
-      const x = originX + Math.cos(p.a) * p.r;
-      const y = originY + Math.sin(p.a * 1.2) * p.r * 0.5;
+      const lx = Math.cos(p.a) * p.r;
+      const ly = Math.sin(p.a) * Math.cos(p.a) * p.r;
+
+      const rx = lx * cosT - ly * sinT;
+      let ry = lx * sinT + ly * cosT;
+
+      ry *= depth
+
+      const x = originX + rx;
+      const y = originY + ry;
 
       ctx.beginPath();
       ctx.arc(x, y, 2, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(0,255,240,0.8)";
+      ctx.fillStyle = "rgba(0,255,240,0.9)";
       ctx.fill();
     });
   }
@@ -83,9 +101,10 @@ window.onload = () => {
     mouse.x = lerp(mouse.x, mouse.targetX, 0.04);
     mouse.y = lerp(mouse.y, mouse.targetY, 0.04);
 
+    originX = lerp(centerX, mouse.x, 0.2);
+    originY = lerp(centerY, mouse.y, 0.2);
+
     ctx.clearRect(0, 0, width, height);
-    const originX = lerp(centerX, mouse.x, 0.2);
-    const originY = lerp(centerY, mouse.y, 0.2);
 
     drawGrid(originX, originY);
     drawParticles(originX, originY);
