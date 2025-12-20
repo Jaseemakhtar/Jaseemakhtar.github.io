@@ -12,8 +12,29 @@
 <body>
   <canvas id="bg"></canvas>
 
+  <nav>
+    <ul>
+      <li>
+        <a href="#hero" title="Home">
+          [Home]
+        </a>
+      </li>
+      <li>
+        <a href="#projects" title="Projects">
+          [Projects]
+        </a>
+      </li>
+      <li>
+        <a href="./experience.html" target="_blank" title="Experience">
+          [Experience]
+        </a>
+      </li>
+    </ul>
+  </nav>
+
   <main>
-    <section class="hero">
+
+    <section id="hero">
       <div class="social-links">
         <ul>
           <li>
@@ -54,32 +75,17 @@
 
       <div class="hero-left">
         <h1>Jaseem Akhtar</h1>
-        <p class="hero-role">Professional Android Engineer | Electronics, mCUs & Robotics Enthusiast</p>
-        <p class="hero-tagline">Known for creating complex, mathematically advanced, non-standard UIs</p>
+        <p class="hero-role">- Professional Android Engineer -<br>Electronics & Robotics Enthusiast</p>
+        <!-- <p class="hero-tagline">Known for creating complex, mathematically advanced, non-standard UIs</p> -->
       </div>
 
     </section>
 
-    <!-- <section class="about">
-      <h2>&lt;About Me&gt;</h2>
-      <p>I'm a Senior Android Developer who loves working on custom UIs, canvas drawing, and motion. 
-         Beyond Android, I explore robotics, electronics, PCB design, and 3D modeling — 
-         basically, I love making things from scratch.</p>
-      <pre class="timeline">
-&gt; 2015 : Started Android development
-&gt; 2018 : Master's in Computer Applications
-&gt; 2022 : Senior Android Engineer
-&gt; 2024 : Built Quadruped Robot
-&gt; 2025 : Transitioning toward Robotics R&D
-      </pre>
-    </section> -->
+    <section id="projects">
 
-    <section class="projects">
-
-      <h2 class="section-header">[Projects]</h2>
+      <h2 class="section-header">Projects</h2>
 
       <div class="section-content">
-        <div class="projects-track">
 
           <div class="project-item">
             <img src="./assets/sample_video_placeholder_test.jpg" alt="Project Video">
@@ -99,12 +105,17 @@
             <p>Robot App → Compose</p>
           </div>
 
-        </div>
+          <div class="project-item">
+            <img src="./assets/sample_video_placeholder_test.jpg" alt="Project Video">
+            <h3 class="project-title">[ SuperShare ]</h3>
+            <p>Intent sharing</p>
+          </div>
+
       </div>
 
     </section>
 
-    <section class="gallery">
+    <section id="gallery">
       <h2 class="section-header">&lt;Project Gallery&gt;</h2>
       <p class="gallery-intro">A few experiments — combining code, geometry, and creativity.</p>
 
