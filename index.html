@@ -7,12 +7,21 @@
   <title>Jaseem Akhtar</title>
   <link rel="stylesheet" href="./styles/revamp_style.css" />
   <script src="./scripts/revamp_script.js"></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
+  <link rel="manifest" href="./assets/site.webmanifest">
 </head>
 
 <body>
   <canvas id="bg"></canvas>
 
   <nav>
+    <div class="brand">
+      <a href="./index.html">
+        <img src="./assets/ic_name_brand.svg" alt="Personal Brand Icon">
+      </a>
+    </div>
     <ul>
       <li>
         <a href="#hero" title="Home">
@@ -35,7 +44,86 @@
   <main>
 
     <section id="hero">
-      <div class="social-links">
+    
+      <div class="hero-left">
+        <h1>Jaseem Akhtar</h1>
+        <p class="hero-role">- Professional Android Engineer -<br>Electronics & Robotics Enthusiast</p>
+        <!-- <p class="hero-tagline">Known for creating complex, mathematically advanced, non-standard UIs</p> -->
+      </div>
+
+    </section>
+
+    <!-- <section id="projects">
+
+      <h2 class="section-header">Projects</h2>
+
+      <div class="section-content">
+
+        <div class="project-item">
+          <img src="./assets/my_quadruped_robot_gif_resized.gif" alt="Project Video">
+          <h3 class="project-title">[ Quadruped Robot ]</h3>
+          <p>CG Algorithms → Jetpack Compose + Canvas</p>
+        </div>
+
+        <div class="project-item">
+          <img src="./assets/my_cg_bezier.gif" alt="Project Video">
+          <h3 class="project-title">[ Biped Robot ]</h3>
+          <p>Quadruped Robot → ESP32 + PCB + 3D Printed Frame</p>
+        </div>
+
+        <div class="project-item">
+          <img src="./assets/sample_video_placeholder_test.jpg" alt="Project Video">
+          <h3 class="project-title">[ Custom PCB ]</h3>
+          <p>Robot App → Compose</p>
+        </div>
+
+        <div class="project-item">
+          <img src="./assets/sample_video_placeholder_test.jpg" alt="Project Video">
+          <h3 class="project-title">[ SuperShare ]</h3>
+          <p>Intent sharing</p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="gallery">
+      <h2 class="section-header">&lt;Project Gallery&gt;</h2>
+      <p class="gallery-intro">A few experiments — combining code, geometry, and creativity.</p>
+
+      <div class="gallery-grid">
+
+        
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/Jaseemakhtar/ComposeCG/main/art/Seipinsky_triangle.gif"
+            alt="Sierpinski Triangle" />
+          <span class="caption">Sierpinski Triangle</span>
+        </div>
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/Jaseemakhtar/ComposeCG/main/art/Koch_curve.gif"
+            alt="Koch Curve" />
+          <span class="caption">Koch Curve</span>
+        </div>
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/Jaseemakhtar/ComposeCG/main/art/Bezier_curve.gif"
+            alt="Bezier Curve" />
+          <span class="caption">Bezier Curve</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="contact">
+      <h2>&lt;Connect&gt;</h2>
+      <div class="commands">
+        <a href="https://github.com/Jaseemakhtar" target="_blank">&gt; connect --github</a>
+        <a href="https://linkedin.com/in/jaseemakhtar" target="_blank">&gt; connect --linkedin</a>
+        <a href="https://www.instagram.com/jaseemabit/" target="_blank">&gt; connect --instagram</a>
+        <a href="https://youtube.com/@jaseemabit" target="_blank">&gt; connect --youtube</a>
+      </div>
+    </section> -->
+    <div class="social-links">
         <ul>
           <li>
             <a href="https://github.com/jaseemakhtar" target="_blank" title="GitHub">
@@ -72,102 +160,6 @@
           </li>
         </ul>
       </div>
-
-      <div class="hero-left">
-        <h1>Jaseem Akhtar</h1>
-        <p class="hero-role">- Professional Android Engineer -<br>Electronics & Robotics Enthusiast</p>
-        <!-- <p class="hero-tagline">Known for creating complex, mathematically advanced, non-standard UIs</p> -->
-      </div>
-
-    </section>
-
-    <section id="projects">
-
-      <h2 class="section-header">Projects</h2>
-
-      <div class="section-content">
-
-          <div class="project-item">
-            <img src="./assets/sample_video_placeholder_test.jpg" alt="Project Video">
-            <h3 class="project-title">[ Quadruped Robot ]</h3>
-            <p>CG Algorithms → Jetpack Compose + Canvas</p>
-          </div>
-          
-          <div class="project-item">
-            <img src="./assets/sample_video_placeholder_test.jpg" alt="Project Video">
-            <h3 class="project-title">[ Biped Robot ]</h3>
-            <p>Quadruped Robot → ESP32 + PCB + 3D Printed Frame</p>
-          </div>
-
-          <div class="project-item">
-            <img src="./assets/sample_video_placeholder_test.jpg" alt="Project Video">
-            <h3 class="project-title">[ Custom PCB ]</h3>
-            <p>Robot App → Compose</p>
-          </div>
-
-          <div class="project-item">
-            <img src="./assets/sample_video_placeholder_test.jpg" alt="Project Video">
-            <h3 class="project-title">[ SuperShare ]</h3>
-            <p>Intent sharing</p>
-          </div>
-
-      </div>
-
-    </section>
-
-    <section id="gallery">
-      <h2 class="section-header">&lt;Project Gallery&gt;</h2>
-      <p class="gallery-intro">A few experiments — combining code, geometry, and creativity.</p>
-
-      <div class="gallery-grid">
-
-        <!-- Robot images -->
-        <!-- <div class="gallery-item">
-          <img src="https://github.com/user-attachments/assets/6b888cfc-19aa-4a49-8376-ea0014f5e4c7"
-            alt="Quadruped Robot 1" />
-          <span class="caption">Quadruped Robot — Design & Build</span>
-        </div>
-        <div class="gallery-item">
-          <img src="https://github.com/user-attachments/assets/ac9c79f1-ef52-4c09-a4ea-d8326a095db8"
-            alt="Quadruped Robot 2" />
-          <span class="caption">ESP32 + 12 Servo PCB</span>
-        </div>
-        <div class="gallery-item">
-          <img src="https://github.com/user-attachments/assets/1f2c7d4e-8ce7-4601-a45d-9a96e8dff5a2"
-            alt="Quadruped Robot 3" />
-          <span class="caption">3D Printed Frame + LED Eyes</span>
-        </div> -->
-
-        <!-- Graphics gifs -->
-        <div class="gallery-item">
-          <img src="https://raw.githubusercontent.com/Jaseemakhtar/ComposeCG/main/art/Seipinsky_triangle.gif"
-            alt="Sierpinski Triangle" />
-          <span class="caption">Sierpinski Triangle</span>
-        </div>
-        <div class="gallery-item">
-          <img src="https://raw.githubusercontent.com/Jaseemakhtar/ComposeCG/main/art/Koch_curve.gif"
-            alt="Koch Curve" />
-          <span class="caption">Koch Curve</span>
-        </div>
-        <div class="gallery-item">
-          <img src="https://raw.githubusercontent.com/Jaseemakhtar/ComposeCG/main/art/Bezier_curve.gif"
-            alt="Bezier Curve" />
-          <span class="caption">Bezier Curve</span>
-        </div>
-
-      </div>
-    </section>
-
-
-    <section class="contact">
-      <h2>&lt;Connect&gt;</h2>
-      <div class="commands">
-        <a href="https://github.com/Jaseemakhtar" target="_blank">&gt; connect --github</a>
-        <a href="https://linkedin.com/in/jaseemakhtar" target="_blank">&gt; connect --linkedin</a>
-        <a href="https://www.instagram.com/jaseemabit/" target="_blank">&gt; connect --instagram</a>
-        <a href="https://youtube.com/@jaseemabit" target="_blank">&gt; connect --youtube</a>
-      </div>
-    </section>
 
     <footer>
       &gt; Built by hand with HTML, CSS, JS <br />

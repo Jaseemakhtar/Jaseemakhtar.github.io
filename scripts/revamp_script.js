@@ -6,6 +6,8 @@ window.onload = () => {
   const maxScroll = main.scrollHeight - main.clientHeight;
   const maxGridMove = -7;
 
+  const particlesLength = (window.innerWidth < 768) ? 20 : 40
+
   let width, height, centerX, centerY, originX, originY;
   let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
 
@@ -63,7 +65,7 @@ window.onload = () => {
     ctx.stroke();
   }
 
-  const particles = Array.from({ length: 40 }, (_, i) => ({
+  const particles = Array.from({ length: particlesLength }, (_, i) => ({
     r: 70 + i * 7,
     a: Math.random() * Math.PI * 2,
     speed: 0.002 + i * 0.0002,
@@ -76,7 +78,9 @@ window.onload = () => {
   
 
   function drawParticles(originX, originY) {
-    particles.forEach((p) => {
+    for (let i = 0; i < particlesLength; i++) {
+      let p = particles[i]
+
       p.a += p.speed;
 
       const lx = Math.cos(p.a) * p.r;
@@ -94,7 +98,7 @@ window.onload = () => {
       ctx.arc(x, y, 2, 0, Math.PI * 2);
       ctx.fillStyle = "rgba(0,255,240,0.9)";
       ctx.fill();
-    });
+    }
   }
 
   function animate() {
