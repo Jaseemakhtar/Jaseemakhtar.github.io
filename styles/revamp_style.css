@@ -104,6 +104,7 @@ canvas#bg {
 #hero {
   height: 100dvh;
   position: relative;
+  padding-inline: 2.6rem;
 }
 
 .social-links {
@@ -145,14 +146,12 @@ canvas#bg {
   padding: 0.2rem 0.6rem;
   /* clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%); */
   backdrop-filter: blur(2px);
+  text-align: center;
 }
 
 .hero-tagline {}
 
 .hero-left {
-  position: absolute;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
   display: flex;
