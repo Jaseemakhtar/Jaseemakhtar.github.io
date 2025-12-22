@@ -2,14 +2,15 @@ window.onload = () => {
   const canvas = document.getElementById("bg");
   const ctx = canvas.getContext("2d");
   const main = document.querySelector("main");
-  
+
   const maxScroll = main.scrollHeight - main.clientHeight;
   const maxGridMove = -7;
 
   const particlesLength = (window.innerWidth < 768) ? 20 : 40
 
-  let width, height, centerX, centerY, originX, originY;
+  let centerX, centerY, originX, originY;
   let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+  let dpr = 1;
 
   window.addEventListener("resize", resize);
   resize();
@@ -19,11 +20,28 @@ window.onload = () => {
     mouse.targetY = e.clientY;
   });
 
+  function clearCanvas() {
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+  }
+
   function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-    centerX = width / 2;
-    centerY = height / 2;
+    const rect = canvas.getBoundingClientRect();
+
+    dpr = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+
+    canvas.style.width = rect.width + "px";
+    canvas.style.height = rect.height + "px";
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    centerX = rect.width / 2;
+    centerY = rect.height / 2;
   }
 
   function lerp(a, b, t) {
@@ -34,8 +52,12 @@ window.onload = () => {
     ctx.strokeStyle = "rgba(12, 189, 207, 0.1)";
     ctx.lineWidth = 1;
 
-    const cols = Math.ceil(width / spacing) + 2;
-    const rows = Math.ceil(height / spacing) + 2;
+    const w = canvas.width / dpr;
+    const h = canvas.height / dpr;
+
+    const cols = Math.ceil(w / spacing) + 2;
+    const rows = Math.ceil(h / spacing) + 2;
+
     const offsetX = originX % spacing;
     const offsetY = originY % spacing;
 
@@ -43,7 +65,7 @@ window.onload = () => {
       const x = i * spacing - offsetX;
       ctx.beginPath();
       ctx.moveTo(x, 0);
-      ctx.lineTo(x, height);
+      ctx.lineTo(x, h);
       ctx.stroke();
     }
 
@@ -51,17 +73,17 @@ window.onload = () => {
       const y = j * spacing - offsetY;
       ctx.beginPath();
       ctx.moveTo(0, y);
-      ctx.lineTo(width, y);
+      ctx.lineTo(w, y);
       ctx.stroke();
     }
 
     ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
-    ctx.lineWidth = 1.2;
+    ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(originX, 0);
-    ctx.lineTo(originX, height);
+    ctx.lineTo(originX, h);
     ctx.moveTo(0, originY);
-    ctx.lineTo(width, originY);
+    ctx.lineTo(w, originY);
     ctx.stroke();
   }
 
@@ -75,7 +97,7 @@ window.onload = () => {
   const cosT = Math.cos(tilt);
   const sinT = Math.sin(tilt);
   const depth = 0.4;
-  
+
 
   function drawParticles(originX, originY) {
     for (let i = 0; i < particlesLength; i++) {
@@ -108,7 +130,7 @@ window.onload = () => {
     originX = lerp(centerX, mouse.x, 0.2);
     originY = lerp(centerY, mouse.y, 0.2);
 
-    ctx.clearRect(0, 0, width, height);
+    clearCanvas()
 
     drawGrid(originX, originY);
     drawParticles(originX, originY);
