@@ -106,10 +106,9 @@ canvas#bg {
   display: flex;
   position: absolute;
   left: 0;
-  top: 0;
+  bottom: 0;
   flex-direction: column;
   justify-content: end;
-  height: 100%;
 }
 
 .social-links>ul,
@@ -126,6 +125,7 @@ nav ul {
   padding: 0.5rem;
   color: #ddd;
   transition: scale 200ms;
+  width: 36px;
 }
 
 .social-links>ul li a:hover {
@@ -197,7 +197,6 @@ main>section {
 
 #projects {
   min-height: 100dvh;
-  padding-inline: 5rem;
   background-color: #11111196;
   backdrop-filter: blur(2px);
 }
@@ -297,6 +296,31 @@ main>section {
 }
 
 @media (max-width: 768px) {
+  .projects-content {
+    padding-inline: 2.6rem;
+  }
+
+  .social-links {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 2.6rem;
+    padding-bottom: 1rem;
+    background-color: #11111196;
+    backdrop-filter: blur(2px);
+  }
+
+  .social-links>ul {
+    display: flex;
+    gap: 8px;
+  }
+
+  .social-links>ul>li {
+    margin: 0;
+  }
+
   .project-item {
     overflow: hidden;
     border-radius: 4px;
@@ -319,7 +343,8 @@ main>section {
     z-index: 2;
   }
 
-  .project-meta, .project-content {
+  .project-meta,
+  .project-content {
     gap: 6px;
   }
 
@@ -433,7 +458,10 @@ footer {
   text-align: center;
   color: #777;
   font-size: 0.9rem;
-  padding: 2.4rem;
+  padding-top: 1rem;
+  padding-bottom: 2.4rem;
+  background-color: #11111196;
+  backdrop-filter: blur(2px);
 }
 
 .gallery-intro {
