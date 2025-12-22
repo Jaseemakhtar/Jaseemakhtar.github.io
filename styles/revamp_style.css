@@ -32,14 +32,14 @@ nav {
   z-index: 2;
 }
 
-.brand > a {
+.brand>a {
   display: block;
   padding: 0.3rem;
   width: 3rem;
   height: 3rem;
 }
 
-.brand > a > img {
+.brand>a>img {
   width: 100%;
   height: 100%;
 }
@@ -112,27 +112,28 @@ canvas#bg {
   height: 100%;
 }
 
-.social-links > ul, nav ul {
+.social-links>ul,
+nav ul {
   list-style-type: none;
 }
 
-.social-links > ul li {
+.social-links>ul li {
   margin-bottom: 0.6rem;
 }
 
-.social-links > ul li a{
+.social-links>ul li a {
   display: block;
   padding: 0.5rem;
   color: #ddd;
   transition: scale 200ms;
 }
 
-.social-links > ul li a:hover{
+.social-links>ul li a:hover {
   color: #fff;
   scale: 1.1;
 }
 
-main > section {
+main>section {
   width: 100%;
 }
 
@@ -175,7 +176,7 @@ main > section {
   clip-path: polygon(26px 0, 100% 0, calc(100% - 26px) 100%, 0 100%);
 }
 
-.hero-right > img {
+.hero-right>img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -222,7 +223,7 @@ main > section {
   flex-direction: column;
 }
 
-#projects .section-content > ul {
+#projects .section-content>ul {
   list-style-type: none;
 }
 
@@ -231,6 +232,8 @@ main > section {
   gap: 1.3rem;
   cursor: pointer;
   margin-bottom: var(--project-item-gap);
+  align-items: center;
+  position: relative;
 }
 
 .project-item-image {
@@ -241,22 +244,28 @@ main > section {
   border-radius: 4px;
 }
 
-.project-item-image > img{
+.project-item-image>img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.project-item-info {
+.project-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   text-align: end;
 }
 
-.project-item-info > h5 {
+.project-content>h5 {
   color: #777;
+}
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .project-item-summary {
@@ -278,7 +287,7 @@ main > section {
   right: -10%;
 }
 
-.project-item:nth-child(even) .project-item-info {
+.project-item:nth-child(even) .project-content {
   text-align: start;
 }
 
@@ -287,25 +296,81 @@ main > section {
   margin-inline-end: 0.6rem;
 }
 
+@media (max-width: 768px) {
+  .project-item {
+    overflow: hidden;
+    border-radius: 4px;
+  }
 
-@media (max-width: 900px) {
-  #projects > .section-content { column-count: 2; }
-}
+  .project-item-image {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+    border-radius: 0;
+  }
 
-@media (max-width: 500px) {
-  #projects > .section-content { column-count: 1; }
+  .project-content {
+    position: absolute;
+    inset: 0;
+    justify-content: flex-end;
+    color: #fff;
+    padding: 0.8rem;
+    z-index: 2;
+  }
+
+  .project-meta, .project-content {
+    gap: 6px;
+  }
+
+  .project-item-summary {
+    position: relative;
+    width: 100%;
+    inset: 0;
+    background: none;
+    padding: 0;
+  }
+
+  .project-meta {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(100%);
+    transition:
+      max-height 0.35s ease,
+      opacity 0.25s ease,
+      transform 0.35s ease;
+  }
+
+  .project-content::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 78px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.01));
+    backdrop-filter: blur(1px);
+    transition: height 0.35s ease;
+    z-index: -1;
+  }
+
+  .project-item:hover .project-meta {
+    max-height: 100%;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .project-item:hover .project-content::before {
+    height: 100%;
+  }
 }
 
 .hero-content h1 {
   font-size: 2rem;
 }
 
-.project-item img {
-  width: 100%;
-}
-
-
-/* --- TABLET (Two items) --- */
 @media (min-width: 768px) {
   .hero-content h1 {
     font-size: 2.6rem;
@@ -315,14 +380,8 @@ main > section {
     font-size: 1.6rem;
   }
 
-  
-
-  /* .project-item {
-    width: calc((100vw - (var(--project-item-pad) * 2) - var(--project-item-gap) * 2) / 2);
-  } */
 }
 
-/* --- DESKTOP (Three items) --- */
 @media (min-width: 1024px) {
   .hero-content h1 {
     font-size: 3rem;
@@ -331,22 +390,12 @@ main > section {
   .hero-role {
     font-size: 1.8rem;
   }
-
-  
-
-  /* .project-item {
-    width: calc((100vw - (var(--project-item-pad) * 2) - var(--project-item-gap) * 3) / 3);
-  } */
 }
 
 @media (min-width: 1200px) {
   .hero-content {
     padding: 0 4rem;
   }
-
-  /* .project-item {
-    width: calc((1200px - (var(--project-item-pad) * 2) - var(--project-item-gap) * 3) / 3);
-  } */
 }
 
 .timeline {
