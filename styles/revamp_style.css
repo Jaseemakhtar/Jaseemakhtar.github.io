@@ -16,20 +16,21 @@
 html,
 body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
   color: #ddd;
   font-family: 'JetBrains Mono', monospace;
-  max-width: 100% !important;
-  overflow: hidden !important;
+  background-color: var(--primary-bg-color);
 }
 
 nav {
   display: flex;
   width: 100vw;
   justify-content: space-between;
-  padding-top: 0.8rem;
+  padding-top: 0.2rem;
   position: absolute;
   padding-inline: 0.8rem;
+  align-items: center;
   z-index: 2;
 }
 
@@ -89,6 +90,8 @@ main {
   width: 100dvw;
   height: 100dvh;
   overflow-y: auto;
+  position: relative;
+  z-index: 2;
 }
 
 canvas#bg {
@@ -98,14 +101,14 @@ canvas#bg {
   width: 100dvw;
   height: 100dvh;
   pointer-events: none;
-  z-index: -1;
+  z-index: 1;
 }
 
 .social-links {
   width: 4.6rem;
   padding: 5rem 1rem;
   display: flex;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   flex-direction: column;
@@ -203,7 +206,7 @@ main>section {
 }
 
 .projects-content {
-  max-width: 1000px;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   padding-inline: 5rem;
@@ -296,9 +299,23 @@ main>section {
   margin-inline-end: 0.6rem;
 }
 
+.hero-content h1 {
+  font-size: 2rem;
+}
+
+footer {
+  text-align: center;
+  color: #777;
+  font-size: 0.9rem;
+  padding-top: 1rem;
+  padding-bottom: 2.4rem;
+  background-color: #11111196;
+  backdrop-filter: blur(2px);
+}
+
 @media (max-width: 768px) {
   .projects-content {
-    padding-inline: 2.6rem;
+    padding-inline: 2rem;
   }
 
   .social-links {
@@ -386,6 +403,7 @@ main>section {
     max-height: 100%;
     opacity: 1;
     transform: translateY(0);
+    backdrop-filter: blur(2px);
   }
 
   .project-item:hover .project-content::before {
@@ -393,179 +411,124 @@ main>section {
   }
 }
 
-.hero-content h1 {
-  font-size: 2rem;
-}
-
-@media (min-width: 768px) {
+@media (max-width: 580px) {
   .hero-content h1 {
-    font-size: 2.6rem;
+    font-size: 1.8rem;
   }
 
   .hero-role {
+    font-size: 1.2rem;
+  }
+
+  .projects-content {
+    padding-inline: 1.2rem;
+  }
+
+  .social-links>ul li a {
+    width: 34px;
+  }
+
+  nav {
+    padding-inline: 0.2rem;
+  }
+
+  nav ul li {
+    margin-inline-start: 1rem;
+  }
+
+  nav ul li a {
+    padding: 0.6rem 0.4rem;
+  }
+
+  nav {
+    padding-inline: 0.2rem;
+    padding-top: 0.2rem;
+  }
+
+  #projects .section-header {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 420px) {
+  nav ul li {
+    margin-inline-start: 0.6rem;
+  }
+
+  #hero {
+    padding-inline: 1.6rem;
+  }
+
+  .hero-content h1 {
     font-size: 1.6rem;
   }
 
+  .hero-role {
+    font-size: 1rem;
+  }
+
+  #projects .section-header {
+    font-size: 1.2rem;
+  }
+
+  .project-type {
+    font-size: 0.8rem;
+  }
+
+  .project-title {
+    font-size: 1rem
+  }
+
+  .project-content {
+    gap: 2px;
+    padding: 12px;
+  }
+
+  .project-meta {
+    gap: 2px;
+  }
+
+  .project-item-summary,
+  .project-tags {
+    font-size: 0.8rem
+  }
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 378px) {
+  nav {
+    padding-top: 0rem;
+  }
+
+  nav ul li {
+    margin-inline-start: 0.2rem;
+  }
+
+  nav ul li a {
+    font-size: 12px;
+  }
+
+  #hero {
+    padding-inline: 16px;
+  }
+
   .hero-content h1 {
-    font-size: 3rem;
+    font-size: 1.4rem;
   }
 
   .hero-role {
-    font-size: 1.8rem;
+    font-size: 0.9rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
   }
 }
 
-@media (min-width: 1200px) {
-  .hero-content {
-    padding: 0 4rem;
+@media (max-width: 340px) {
+  nav ul li {
+    margin-inline-start: 0;
   }
 }
 
-.timeline {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  border-left: 2px solid #00fff0;
-  margin-top: 1rem;
-}
 
-.card {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 10px rgba(0, 255, 240, 0.3);
-}
-
-.commands a {
-  display: block;
-  color: #00fff0;
-  text-decoration: none;
-  margin: 0.5rem 0;
-  transition: color 0.2s;
-}
-
-.commands a:hover {
-  color: #ffc107;
-}
-
-footer {
-  text-align: center;
-  color: #777;
-  font-size: 0.9rem;
-  padding-top: 1rem;
-  padding-bottom: 2.4rem;
-  background-color: #11111196;
-  backdrop-filter: blur(2px);
-}
-
-.gallery-intro {
-  color: #aaa;
-  font-size: 0.9rem;
-  margin-bottom: 2rem;
-  font-style: italic;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.2rem;
-}
-
-.gallery-item {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  filter: brightness(0.85);
-  transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.gallery-item:hover img {
-  filter: brightness(1.1);
-  transform: scale(1.05);
-}
-
-.gallery-item:hover {
-  box-shadow: 0 0 12px rgba(0, 255, 240, 0.3);
-  transform: translateY(-4px);
-}
-
-.caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 0.4rem 0;
-  background: rgba(0, 0, 0, 0.65);
-  color: #00fff0;
-  font-size: 0.85rem;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.gallery-item:hover .caption {
-  opacity: 1;
-}
-
-.about-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem;
-  color: #ddd;
-}
-
-.about-header {
-  text-align: center;
-  margin-top: 5rem;
-}
-
-.profile-photo {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #00fff0;
-  margin-bottom: 1rem;
-}
-
-.about-header h1 {
-  color: #00fff0;
-  margin-bottom: 2rem;
-}
-
-.about-content p {
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
-  font-size: 1.05rem;
-  color: #ccc;
-}
-
-.inline-image {
-  width: 100%;
-  border-radius: 8px;
-  margin: 2rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.inline-video {
-  width: 100%;
-  border-radius: 8px;
-  margin: 2rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
+@media (max-width: 240px) {}

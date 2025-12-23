@@ -1,10 +1,6 @@
 window.onload = () => {
   const canvas = document.getElementById("bg");
   const ctx = canvas.getContext("2d");
-  const main = document.querySelector("main");
-
-  const maxScroll = main.scrollHeight - main.clientHeight;
-  const maxGridMove = -7;
 
   const particlesLength = (window.innerWidth < 768) ? 20 : 40
 
@@ -98,7 +94,6 @@ window.onload = () => {
   const sinT = Math.sin(tilt);
   const depth = 0.4;
 
-
   function drawParticles(originX, originY) {
     for (let i = 0; i < particlesLength; i++) {
       let p = particles[i]
@@ -124,11 +119,11 @@ window.onload = () => {
   }
 
   function animate() {
-    mouse.x = lerp(mouse.x, mouse.targetX, 0.04);
-    mouse.y = lerp(mouse.y, mouse.targetY, 0.04);
+    mouse.x = lerp(mouse.x, mouse.targetX, 0.06);
+    mouse.y = lerp(mouse.y, mouse.targetY, 0.06);
 
-    originX = lerp(centerX, mouse.x, 0.2);
-    originY = lerp(centerY, mouse.y, 0.2);
+    originX = lerp(centerX, mouse.x, 0.4);
+    originY = lerp(centerY, mouse.y, 0.4);
 
     clearCanvas()
 
