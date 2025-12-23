@@ -18,29 +18,29 @@
 
   <main>
     <nav>
-    <div class="brand">
-      <a href="./index.html">
-        <img src="./assets/ic_name_brand.svg" alt="Personal Brand Icon">
-      </a>
-    </div>
-    <ul>
-      <li>
-        <a href="#hero" title="Home">
-          [Home]
+      <div class="brand">
+        <a href="./index.html">
+          <img src="./assets/ic_name_brand.svg" alt="Personal Brand Icon">
         </a>
-      </li>
-      <li>
-        <a href="#projects" title="Projects">
-          [Projects]
-        </a>
-      </li>
-      <li>
-        <a href="./experience.html" target="_blank" title="Experience">
-          [Experience]
-        </a>
-      </li>
-    </ul>
-  </nav>
+      </div>
+      <ul>
+        <li>
+          <a href="#hero" title="Home">
+            [Home]
+          </a>
+        </li>
+        <li>
+          <a href="#projects" title="Projects">
+            [Projects]
+          </a>
+        </li>
+        <li>
+          <a href="./experience.html" target="_blank" title="Experience">
+            [Experience]
+          </a>
+        </li>
+      </ul>
+    </nav>
 
 
     <section id="hero">
@@ -48,7 +48,7 @@
       <div class="hero-content">
         <h1>Jaseem Akhtar</h1>
         <div class="hero-role">
-          <p>Professional Android Engineer</p>
+          <p>Professional Android Developer</p>
           <p>Electronics & Robotics Enthusiast</p>
         </div>
         <!-- <p class="hero-tagline">Known for creating complex, mathematically advanced, non-standard UIs</p> -->
@@ -56,9 +56,33 @@
 
     </section>
 
+    <section id="about">
+      <div class="section-container">
+        <h2 class="section-header">Brief About Me</h2>
+        <div class="section-content">
+          <div class="image">
+            <div class="img-wrapper">
+              <img src="./assets/profile_2.JPG" alt="Profile Image">
+            </div>
+          </div>
+          <div class="profession-tagline">
+            Senior Android Developer
+          </div>
+          <div class="info">
+            A builder who cares about how software feels as much as how it works.
+            I focus on <span class="highlight-word">usability</span>, <span class="highlight-word">clarity</span>, and
+            solving real <span class="highlight-word">user</span> problems through <span class="highlight-word">clean</span> design and code.
+          </div>
+          <a class="a-button" href="./about.html">
+            Know more
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section id="projects">
-      <div class="projects-content">
-        <h2 class="section-header">Projects</h2>
+      <div class="section-container">
+        <h2 class="section-header">Things I've built</h2>
 
         <div class="section-content">
           <ul>
@@ -72,12 +96,14 @@
                 <h3 class="project-title">Quadruped Robot</h3>
 
                 <div class="project-meta">
-                  <p class="project-item-summary">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt
-                    aperiam blanditiis facere voluptatibus ut ab deserunt nulla sapiente eius iusto, itaque expedita,
-                    fuga quisquam! Quaerat, consequatur unde. Sit, quam? Eveniet!</p>
-                  <div class="project-tags"><span class="project-tag">Robust System Design</span> <span
-                      class="project-tag">C++</span> <span class="project-tag">Esp32-WROOM32</span> <span
-                      class="project-tag">FreeRTOS</span>
+                  <p class="project-item-summary">
+                    A servo-based quadruped robot designed and built from the ground up. The project focuses on inverse
+                    kinematics, gait generation, and clean separation between hardware drivers and motion logic.
+                  </p>
+                  <div class="project-tags">
+                    <span class="project-tag">Robust System Design</span> <span class="project-tag">C++</span> <span
+                      class="project-tag">Esp32-WROOM32</span> <span class="project-tag">FreeRTOS</span> <span
+                      class="project-tag">Bluetooth</span>
                   </div>
                 </div>
               </div>
@@ -90,16 +116,38 @@
 
               <div class="project-content">
                 <h5 class="project-type">Personal Project</h5>
-                <h3 class="project-title">Custom PCB</h3>
+                <h3 class="project-title">LED matrix keychain</h3>
 
                 <div class="project-meta">
-                  <p class="project-item-summary">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo labore
-                    libero repellendus sapiente, quaerat aperiam perferendis officiis veniam facilis quos eveniet eos
-                    incidunt distinctio exercitationem culpa suscipit iure molestiae praesentium.</p>
+                  <p class="project-item-summary">The project includes custom PCB design, component selection, and
+                    firmware development. Supports dynamic text and pattern control over Wi-Fi. Created as an experiment
+                    in embedded systems, PCB design, and visual expression through hardware.</p>
                   <div class="project-tags"><span class="project-tag">KiCAD</span> <span class="project-tag">Shift
                       Registers</span> <span class="project-tag">Esp8266</span> <span
                       class="project-tag">FreeRTOS</span>
                     <span class="project-tag">C++</span>
+                  </div>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="project-item">
+              <div class="project-item-image">
+                <img src="./assets/sample_video_placeholder_test.jpg" alt="Project Video">
+              </div>
+
+              <div class="project-content">
+                <h5 class="project-type">Personal Project</h5>
+                <h3 class="project-title">Ofbit</h3>
+
+                <div class="project-meta">
+                  <p class="project-item-summary">An app built to control the robot wirelessly with real-time
+                    responsiveness.
+                    The UI components are complex, non-standard, custom-designed with a futuristic style.
+                    Structured using modern Android architecture principles for scalability and future features.</p>
+                  <div class="project-tags"><span class="project-tag">Android</span><span
+                      class="project-tag">Kotlin</span><span class="project-tag">Jetpack Compose</span>
                   </div>
                 </div>
 
@@ -114,43 +162,27 @@
 
               <div class="project-content">
                 <h5 class="project-type">Personal Project</h5>
-                <h3 class="project-title">Biped Robot</h3>
+                <h3 class="project-title">Explore CG</h3>
 
                 <div class="project-meta">
-                  <p class="project-item-summary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum eaque
-                    sunt dolorem officiis corporis quod voluptatem eligendi quibusdam laudantium explicabo. Tempore
-                    soluta
-                    minima impedit laboriosam quae recusandae mollitia voluptas magni!</p>
+                  <p class="project-item-summary">
+                    One of my Popular project, an open-source app, showcasing mathematical, interactive computer
+                    graphics algorithms.
+                    Includes creative visualizations of fractals, procedural graphics, and mathematical art for learning
+                    and exploration. Designed as an interactive playground</p>
                   <div class="project-tags">
-                    <span class="project-tag">FreeCAD</span><span class="project-tag">3d Print</span>
-                  </div>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="project-item">
-              <div class="project-item-image">
-                <img src="./assets/sample_video_placeholder_test.jpg" alt="Project Video">
-              </div>
-
-              <div class="project-content">
-                <h5 class="project-type">Personal Project</h5>
-                <h3 class="project-title">SuperShare</h3>
-
-                <div class="project-meta">
-                  <p class="project-item-summary">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti,
-                    iure
-                    repudiandae! Ducimus molestias quidem ratione sequi facilis sint corrupti consectetur aperiam earum
-                    eos quo repellat labore, dolorem officiis iste reiciendis?</p>
-                  <div class="project-tags"><span class="project-tag">FreeCAD</span><span class="project-tag">3d
-                      Print</span>
+                    <span class="project-tag">Android</span><span class="project-tag">Kotlin</span><span
+                      class="project-tag">Jetpack Compose</span>
                   </div>
                 </div>
 
               </div>
             </li>
           </ul>
+        </div>
+
+        <div class="more">
+          <a href="./projects.html" class="a-button">Explore More</a>
         </div>
       </div>
 
