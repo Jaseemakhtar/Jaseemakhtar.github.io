@@ -420,8 +420,39 @@ footer {
     font-size: 1.2rem;
   }
 
+  .project-item {
+    flex-direction: column;
+    gap: 0;
+    background-color: var(--primary-bg-color);
+  }
+
+  .project-item:nth-child(2n) {
+    flex-direction: column;
+  }
+
   .projects-content {
     padding-inline: 1.2rem;
+    position: relative;
+  }
+
+  .project-content::before {
+    display: none;
+  }
+
+  .project-content {
+    position: relative;
+  }
+
+  .project-meta {
+    max-height: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .project-item:hover .project-meta {
+    max-height: none;
+    opacity: 1;
+    transform: none;
   }
 
   .social-links>ul li a {
