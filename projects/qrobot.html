@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaseem Akhtar - About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/page.css" />
+    <link rel="stylesheet" href="../styles/qrobot.css" />
+    <script src="../scripts/grid.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+</head>
+
+<body>
+    <canvas id="bg"></canvas>
+
+    <main>
+
+        <section id="project-qr-m2">
+
+            <div class="section-container">
+                <h2 class="section-header">Quadruped Robot - MK-II</h2>
+
+                <figure class="video-block">
+                    <video muted autoplay controls>
+                        <source src="../assets/quadruped_demo.mp4" type="video/mp4">
+                    </video>
+                </figure>
+
+                <section aria-labelledby="overview">
+                    <h2 id="overview">Overview</h2>
+
+                    <p>
+                        This robot was built as a <strong>serious hobby project</strong> to apply and deepen my
+                        understanding of
+                        <strong>electronics</strong>, <strong>embedded systems</strong>, <strong>software
+                            architecture</strong>, and <strong>mathematics</strong>, while also serving as a
+                        platform to experiment with core robotics concepts.
+                    </p>
+
+                    <p>
+                        Rather than focusing on a single demo or fixed behavior, the goal was to build a system that
+                        could evolve — something flexible enough to test ideas, refine models, and grow over time.
+                    </p>
+                </section>
+
+                <section aria-labelledby="leg-model">
+                    <h2 id="leg-model">Leg model and kinematics</h2>
+
+                    <p>
+                        Each leg is modeled as a <strong>3-DOF mechanism</strong>, consisting of a
+                        coxa, femur, and tibia.
+                    </p>
+
+                    <p>
+                        Instead of controlling joint angles directly, leg motion is defined by
+                        specifying the desired <strong>foot position in Cartesian space</strong>.
+                        These positions are converted into joint angles using
+                        <strong>inverse kinematics</strong>.
+                    </p>
+
+                    <p>
+                        This approach keeps the motion model independent of hardware details and
+                        makes movement easier to reason about geometrically.
+                    </p>
+                </section>
+
+                <section aria-labelledby="dynamic-motion">
+                    <h2 id="dynamic-motion">Dynamic, parameter-driven motion</h2>
+
+                    <p>
+                        The kinematics model makes the robot fully dynamic — nothing is hardcoded.
+                    </p>
+
+                    <p>
+                        Walking motion is controlled using a <strong>stride vector</strong>:
+                    </p>
+
+                    <ul>
+                        <li>The vector length defines the stride distance</li>
+                        <li>The vector angle defines the direction of movement</li>
+                    </ul>
+
+                    <p>
+                        Additional parameters can be adjusted at runtime, including:
+                    </p>
+
+                    <ul>
+                        <li>robot height</li>
+                        <li>stride length</li>
+                        <li>leg lift height during the walk cycle</li>
+                        <li>overall movement speed</li>
+                    </ul>
+
+                    <p>
+                        Because movement is parameterized rather than scripted, changing how the
+                        robot walks does not require rewriting motion logic.
+                    </p>
+                </section>
+
+                <section aria-labelledby="software-architecture">
+                    <h2 id="software-architecture">Software architecture</h2>
+
+                    <p>
+                        All control logic runs on the software and firmware side of the robot.
+                        The system is designed using <strong>clear, modular layers</strong>,
+                        inspired by established software architecture principles.
+                    </p>
+
+                    <p>
+                        Core components include:
+                    </p>
+
+                    <ul>
+                        <li><code>ServoDriver</code></li>
+                        <li><code>LegDriver</code></li>
+                        <li><code>Trajectory</code></li>
+                        <li><code>MotionController</code></li>
+                        <li><code>RobotController</code></li>
+                    </ul>
+                </section>
+
+                <section aria-labelledby="hardware-abstraction">
+                    <h2 id="hardware-abstraction">Hardware abstraction and leg control</h2>
+
+                    <p>
+                        The <code>ServoDriver</code> handles hardware-specific responsibilities. It
+                        receives joint angles as input and uses the appropriate low-level drivers
+                        to control individual servos.
+                    </p>
+
+                    <p>
+                        The <code>LegDriver</code> is completely hardware-agnostic. It operates
+                        purely on <strong>x, y, z foot positions</strong>, converts them to joint
+                        angles using the inverse kinematics model, and forwards those angles to
+                        the corresponding <code>ServoDriver</code> instances for the coxa, femur,
+                        and tibia.
+                    </p>
+
+                    <p>
+                        This separation ensures that hardware changes do not affect higher-level
+                        motion logic.
+                    </p>
+                </section>
+
+                <section aria-labelledby="trajectory-motion">
+                    <h2 id="trajectory-motion">Trajectories and motion execution</h2>
+
+                    <p>
+                        How a leg moves through space is defined by a <strong>trajectory</strong>.
+                        A trajectory describes the path a foot should follow.
+                    </p>
+
+                    <p>
+                        Supported trajectory types include:
+                    </p>
+
+                    <ul>
+                        <li>linear</li>
+                        <li>Bézier</li>
+                        <li>circular</li>
+                        <li>other parametric paths</li>
+                    </ul>
+
+                    <p>
+                        Individual trajectories — or groups of trajectories — are executed by the
+                        <code>MotionController</code>.
+                    </p>
+
+                    <p>
+                        The <code>MotionController</code> is aware of speed, distance, and timing,
+                        and ensures smooth execution of motion. It can also apply
+                        <strong>easing functions</strong> to control acceleration and deceleration.
+                    </p>
+                </section>
+
+                <section aria-labelledby="remote-control">
+                    <h2 id="remote-control">Remote control layer</h2>
+
+                    <p>
+                        A dedicated remote control layer runs on a separate core of the CPU.
+                    </p>
+
+                    <p>
+                        This layer is responsible for:
+                    </p>
+
+                    <ul>
+                        <li>receiving data via Bluetooth</li>
+                        <li>parsing incoming commands</li>
+                        <li>forwarding structured commands to the main control core</li>
+                    </ul>
+
+                    <p>
+                        It includes modules such as <code>BluetoothController</code> and
+                        <code>CommandParser</code>, keeping communication concerns isolated from
+                        motion and control logic.
+                    </p>
+                </section>
+
+                <section aria-labelledby="extensibility">
+                    <h2 id="extensibility">Modularity and extensibility</h2>
+
+                    <p>
+                        This modular architecture makes it easy to integrate new features or
+                        sensors with minimal changes.
+                    </p>
+
+                    <p>
+                        The robot can be controlled not only by the Android app, but also by
+                        external systems such as:
+                    </p>
+
+                    <ul>
+                        <li>a different microcontroller</li>
+                        <li>scripted control systems</li>
+                        <li>AI-based controllers</li>
+                    </ul>
+                </section>
+
+                <section aria-labelledby="control-interface">
+                    <h2 id="control-interface">Control interface</h2>
+
+                    <p>
+                        A custom Android application is used to send high-level commands to the
+                        robot as structured strings. The robot parses these commands and executes
+                        them through its control system.
+                    </p>
+
+                    <p>
+                        Detailed documentation for the Android app is provided separately.
+                    </p>
+                </section>
+
+                <section aria-labelledby="hardware">
+                    <h2 id="hardware">Hardware configuration</h2>
+
+                    <ul>
+                        <li><strong>Microcontroller:</strong> ESP32-WROOM-32</li>
+                        <li><strong>Servo controller:</strong> PCA9685</li>
+                        <li><strong>Servos:</strong> DS Power 21G</li>
+                        <li><strong>Power:</strong> 2 × 3.7V Li-ion batteries</li>
+                        <li><strong>Servo power regulation:</strong> 20A buck converter</li>
+                        <li><strong>MCU power regulation:</strong> 3A buck converter</li>
+                    </ul>
+                </section>
+
+                <section aria-labelledby="closing">
+                    <h2 id="closing">Closing note</h2>
+
+                    <p>
+                        This project represents a system I am genuinely proud of — not because it
+                        is finished, but because it is <strong>well-structured, extensible, and
+                            grounded in fundamentals</strong>.
+                    </p>
+
+                    <p>
+                        It serves both as a functional robot and as a platform for continued
+                        learning and experimentation in robotics.
+                    </p>
+                </section>
+            </div>
+        </section>
+
+        <div class="social-links">
+            <ul>
+                <li>
+                    <a href="https://github.com/jaseemakhtar" target="_blank" title="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-6 w-6"
+                            aria-hidden="true">
+                            <path
+                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                            </path>
+                        </svg>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.linkedin.com/in/jaseemakhtar/" target="_blank" title="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"
+                            aria-hidden="true">
+                            <path
+                                d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z">
+                            </path>
+                        </svg>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://instagram.com/jaseemabit" target="_blank" title="Instagram">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="currentColor"
+                            class="h-6 w-6" aria-hidden="true">
+                            <path
+                                d="M295.42,6c-53.2,2.51-89.53,11-121.29,23.48-32.87,12.81-60.73,30-88.45,57.82S40.89,143,28.17,175.92c-12.31,31.83-20.65,68.19-23,121.42S2.3,367.68,2.56,503.46,3.42,656.26,6,709.6c2.54,53.19,11,89.51,23.48,121.28,12.83,32.87,30,60.72,57.83,88.45S143,964.09,176,976.83c31.8,12.29,68.17,20.67,121.39,23s70.35,2.87,206.09,2.61,152.83-.86,206.16-3.39S799.1,988,830.88,975.58c32.87-12.86,60.74-30,88.45-57.84S964.1,862,976.81,829.06c12.32-31.8,20.69-68.17,23-121.35,2.33-53.37,2.88-70.41,2.62-206.17s-.87-152.78-3.4-206.1-11-89.53-23.47-121.32c-12.85-32.87-30-60.7-57.82-88.45S862,40.87,829.07,28.19c-31.82-12.31-68.17-20.7-121.39-23S637.33,2.3,501.54,2.56,348.75,3.4,295.42,6m5.84,903.88c-48.75-2.12-75.22-10.22-92.86-17-23.36-9-40-19.88-57.58-37.29s-28.38-34.11-37.5-57.42c-6.85-17.64-15.1-44.08-17.38-92.83-2.48-52.69-3-68.51-3.29-202s.22-149.29,2.53-202c2.08-48.71,10.23-75.21,17-92.84,9-23.39,19.84-40,37.29-57.57s34.1-28.39,57.43-37.51c17.62-6.88,44.06-15.06,92.79-17.38,52.73-2.5,68.53-3,202-3.29s149.31.21,202.06,2.53c48.71,2.12,75.22,10.19,92.83,17,23.37,9,40,19.81,57.57,37.29s28.4,34.07,37.52,57.45c6.89,17.57,15.07,44,17.37,92.76,2.51,52.73,3.08,68.54,3.32,202s-.23,149.31-2.54,202c-2.13,48.75-10.21,75.23-17,92.89-9,23.35-19.85,40-37.31,57.56s-34.09,28.38-57.43,37.5c-17.6,6.87-44.07,15.07-92.76,17.39-52.73,2.48-68.53,3-202.05,3.29s-149.27-.25-202-2.53m407.6-674.61a60,60,0,1,0,59.88-60.1,60,60,0,0,0-59.88,60.1M245.77,503c.28,141.8,115.44,256.49,257.21,256.22S759.52,643.8,759.25,502,643.79,245.48,502,245.76,245.5,361.22,245.77,503m90.06-.18a166.67,166.67,0,1,1,167,166.34,166.65,166.65,0,0,1-167-166.34">
+                            </path>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <footer>
+            &gt; Built by hand with HTML, CSS, JS <br />
+            &gt; Last update: 2025
+        </footer>
+
+    </main>
+</body>
+
+</html>
