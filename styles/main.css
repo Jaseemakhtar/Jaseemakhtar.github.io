@@ -380,7 +380,8 @@ main>section {
   border-radius: 4px;
 }
 
-.project-item-image>img, .project-item-image>video {
+.project-item-image>img,
+.project-item-image>video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -588,14 +589,14 @@ footer {
     font-size: 1.2rem;
   }
 
+  #projects .section-content ul li:nth-child(2n) .project-item {
+    flex-direction: column;
+  }
+
   .project-item {
     flex-direction: column;
     gap: 0;
     background-color: var(--primary-bg-color);
-  }
-
-  .project-item:nth-child(2n) {
-    flex-direction: column;
   }
 
   .section-container {
