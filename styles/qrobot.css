@@ -2,3 +2,8 @@
     background-color: #11111196;
     backdrop-filter: blur(2px);
 }
+
+nav {
+  --blur: 2px;
+  --bg-alpha: 0.3;
+}

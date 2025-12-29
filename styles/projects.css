@@ -1,0 +1,8 @@
+nav {
+  --blur: 2px;
+  --bg-alpha: 0.3;
+}
+
+.section-header::before {
+    display: none;
+}
