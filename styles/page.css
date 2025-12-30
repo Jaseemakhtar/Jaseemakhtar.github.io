@@ -42,6 +42,12 @@ figure.image figcaption {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.71), rgba(0, 0, 0, 0));
     width: 100%;
     z-index: 2;
+    transition: transform 200ms;
+    transform: translateY(100%);
+}
+
+figure.image:hover figcaption {
+    transform: translateY(0);
 }
 
 .section-container section h2 {
@@ -63,6 +69,11 @@ figure.image figcaption {
 
 .video-block video {
     width: 100%;
+}
+
+nav {
+  --blur: 2px;
+  --bg-alpha: 0.3;
 }
 
 @media (max-width: 1080px) {

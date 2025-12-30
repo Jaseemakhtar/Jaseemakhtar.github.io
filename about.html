@@ -45,12 +45,42 @@
   <link rel="stylesheet" href="./styles/main.css" />
   <link rel="stylesheet" href="./styles/page.css" />
   <script src="./scripts/grid.js"></script>
+  <style>
+    nav {
+      --blur: 2px;
+      --bg-alpha: 0.3;
+    }
+  </style>
 </head>
 
 <body>
   <canvas id="bg"></canvas>
 
   <main>
+    <nav>
+      <div class="brand">
+        <a href="../index.html">
+          <img src="../assets/ic_name_brand.svg" alt="Personal Brand Icon">
+        </a>
+      </div>
+      <ul>
+        <li>
+          <a href="./about.html" class="selected-nav" title="About">
+            [About]
+          </a>
+        </li>
+        <li>
+          <a href="./projects.html" title="Projects">
+            [Projects]
+          </a>
+        </li>
+        <li>
+          <a href="./experience.html" title="Experience">
+            [Experience]
+          </a>
+        </li>
+      </ul>
+    </nav>
 
     <section id="about-me">
 

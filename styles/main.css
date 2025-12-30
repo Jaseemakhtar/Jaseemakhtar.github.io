@@ -41,6 +41,14 @@ nav {
   height: var(--nav-bar);
 }
 
+.selected-nav::before {
+  transform: scale(1);
+}
+
+.selected-nav {
+  color: #fff;
+}
+
 .brand {
   height: 100%;
   aspect-ratio: 1;
@@ -176,7 +184,6 @@ main>section:nth-of-type(n + 2) {
   width: 40%;
   margin-left: 16px;
   background: #777;
-  transform: translateY(-50%);
 }
 
 main>section {

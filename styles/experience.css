@@ -1,0 +1,14 @@
+nav {
+    --blur: 2px;
+    --bg-alpha: 0.3;
+}
+
+.section-header::before {
+    display: none;
+}
+
+#experience {
+    min-height: 100dvh;
+    background-color: #11111196;
+    backdrop-filter: blur(2px);
+}
