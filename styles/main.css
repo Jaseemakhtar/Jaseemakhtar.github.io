@@ -33,7 +33,7 @@ nav {
   width: 100vw;
   justify-content: space-between;
   padding-top: 0.2rem;
-  position: sticky;
+  position: fixed;
   top: 0;
   padding-inline: 0.8rem;
   align-items: center;
