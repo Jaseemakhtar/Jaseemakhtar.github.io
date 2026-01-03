@@ -340,6 +340,19 @@ main>section {
   color: #ffc107;
 }
 
+.a-link {
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: rgb(var(--primary-color));
+}
+
+.a-link::after {
+  content: "↗";
+  transition: transform 0.2s ease;
+}
+
 .a-button {
   text-decoration: none;
   display: inline-flex;

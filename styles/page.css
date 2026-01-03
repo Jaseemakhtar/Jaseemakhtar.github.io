@@ -64,8 +64,13 @@ figure.image:hover figcaption {
 }
 
 .section-container section ul {
-    list-style-position: inside;
+    padding-left: 1em;
     margin-bottom: 16px;
+}
+
+.section-container section ul li{
+    margin-bottom: 8px;
+    font-size: 1.06rem;
 }
 
 .video-block video {

@@ -27,11 +27,35 @@
     <canvas id="bg"></canvas>
 
     <main>
+        <nav>
+            <div class="brand">
+                <a href="../index.html">
+                    <img src="../assets/ic_name_brand.svg" alt="Personal Brand Icon">
+                </a>
+            </div>
+            <ul>
+                <li>
+                    <a href="../about.html" title="About">
+                        [About]
+                    </a>
+                </li>
+                <li>
+                    <a href="../projects.html" title="Projects">
+                        [Projects]
+                    </a>
+                </li>
+                <li>
+                    <a href="../experience.html" title="Experience">
+                        [Experience]
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
         <section id="project-qr-m2">
 
             <div class="section-container">
-                <h2 class="section-header">Quadruped Robot - MK-II</h2>
+                <h2 class="section-header">Ofbit - Remote-Control App for Robots</h2>
 
                 <video autoplay muted controls loop playsinline preload="metadata" poster="../assets/og/quadruped.jpg">
                     <source src="../assets/videos/ofbit_preview.webm" type="video/webm">
@@ -44,233 +68,102 @@
                     <h2 id="overview">Overview</h2>
 
                     <p>
-                        This robot was built as a <strong>serious hobby project</strong> to apply and deepen my
-                        understanding of
-                        <strong>electronics</strong>, <strong>embedded systems</strong>, <strong>software
-                            architecture</strong>, and <strong>mathematics</strong>, while also serving as a
-                        platform to experiment with core robotics concepts.
+                        This project was built as a <strong>serious hobby project</strong> to build
+                        <strong>futuristic</strong> &
+                        <strong>intuitive</strong> Remote Controller to control any kind of Robot via
+                        <strong>Bluetooth</strong> or <strong>WiFi</strong> (as of now).
+                        And also letting implementation of any wireless protocol in future by just extending the
+                        interface contract.
                     </p>
 
                     <p>
-                        Rather than focusing on a single demo or fixed behavior, the goal was to build a system that
-                        could evolve — something flexible enough to test ideas, refine models, and grow over time.
+                        Documentation about the Robot itself can be found <a class="a-link" href="qrobot.html">here</a>.
                     </p>
                 </section>
 
-                <section aria-labelledby="leg-model">
-                    <h2 id="leg-model">Leg model and kinematics</h2>
-
-                    <p>
-                        Each leg is modeled as a <strong>3-DOF mechanism</strong>, consisting of a
-                        coxa, femur, and tibia.
-                    </p>
-
-                    <p>
-                        Instead of controlling joint angles directly, leg motion is defined by
-                        specifying the desired <strong>foot position in Cartesian space</strong>.
-                        These positions are converted into joint angles using
-                        <strong>inverse kinematics</strong>.
-                    </p>
-
-                    <p>
-                        This approach keeps the motion model independent of hardware details and
-                        makes movement easier to reason about geometrically.
-                    </p>
-                </section>
-
-                <section aria-labelledby="dynamic-motion">
-                    <h2 id="dynamic-motion">Dynamic, parameter-driven motion</h2>
-
-                    <p>
-                        The kinematics model makes the robot fully dynamic — nothing is hardcoded.
-                    </p>
-
-                    <p>
-                        Walking motion is controlled using a <strong>stride vector</strong>:
-                    </p>
-
+                <section aria-labelledby="key-features">
+                    <h2 id="overview">Key Features</h2>
                     <ul>
-                        <li>The vector length defines the stride distance</li>
-                        <li>The vector angle defines the direction of movement</li>
-                    </ul>
+                        <li>
+                            Dual Communication Protocols: Comes with built-in support for both Bluetooth and WiFi,
+                            ensuring broad compatibility with a wide range of hobbyist and custom-built robotic
+                            platforms.
+                        </li>
 
-                    <p>
-                        Additional parameters can be adjusted at runtime, including:
-                    </p>
+                        <li>
+                            Intuitive Gesture-Based Joystick: Features a custom-built, haptic-enabled joystick
+                            Composable for precise, responsive, and natural analog control, moving beyond traditional
+                            button
+                            interfaces.
+                        </li>
 
-                    <ul>
-                        <li>robot height</li>
-                        <li>stride length</li>
-                        <li>leg lift height during the walk cycle</li>
-                        <li>overall movement speed</li>
-                    </ul>
+                        <li>
+                            Camera: Use the device's camera using Jetpack CameraX to provide control the Robot
+                            autonomously by defining the targets or actions.
+                            Or by giving the control to AI.
+                        </li>
 
-                    <p>
-                        Because movement is parameterized rather than scripted, changing how the
-                        robot walks does not require rewriting motion logic.
-                    </p>
-                </section>
+                        <li>
+                            Haptic Feedback
+                            System: Provides tactile feedback for user actions like joystick movement and release,
+                            making the
+                            control experience more tangible and responsive.
+                        </li>
 
-                <section aria-labelledby="software-architecture">
-                    <h2 id="software-architecture">Software architecture</h2>
-
-                    <p>
-                        All control logic runs on the software and firmware side of the robot.
-                        The system is designed using <strong>clear, modular layers</strong>,
-                        inspired by established software architecture principles.
-                    </p>
-
-                    <p>
-                        Core components include:
-                    </p>
-
-                    <ul>
-                        <li><code>ServoDriver</code></li>
-                        <li><code>LegDriver</code></li>
-                        <li><code>Trajectory</code></li>
-                        <li><code>MotionController</code></li>
-                        <li><code>RobotController</code></li>
+                        <li>
+                            Modern & Modular Architecture: Built entirely with
+                            Kotlin and Jetpack Compose, the app follows modern MVVM principles, ensuring a clean
+                            separation of
+                            concerns which makes the codebase easy to maintain and scale.
+                        </li>
                     </ul>
                 </section>
 
-                <section aria-labelledby="hardware-abstraction">
-                    <h2 id="hardware-abstraction">Hardware abstraction and leg control</h2>
+                <section aria-labelledby="tech-stack-and-implementation">
+                    <h2 id="overview">Tech Stack & Implementation</h2>
 
                     <p>
-                        The <code>ServoDriver</code> handles hardware-specific responsibilities. It
-                        receives joint angles as input and uses the appropriate low-level drivers
-                        to control individual servos.
-                    </p>
-
-                    <p>
-                        The <code>LegDriver</code> is completely hardware-agnostic. It operates
-                        purely on <strong>x, y, z foot positions</strong>, converts them to joint
-                        angles using the inverse kinematics model, and forwards those angles to
-                        the corresponding <code>ServoDriver</code> instances for the coxa, femur,
-                        and tibia.
-                    </p>
-
-                    <p>
-                        This separation ensures that hardware changes do not affect higher-level
-                        motion logic.
-                    </p>
-                </section>
-
-                <section aria-labelledby="trajectory-motion">
-                    <h2 id="trajectory-motion">Trajectories and motion execution</h2>
-
-                    <p>
-                        How a leg moves through space is defined by a <strong>trajectory</strong>.
-                        A trajectory describes the path a foot should follow.
-                    </p>
-
-                    <p>
-                        Supported trajectory types include:
+                        The application leverages the latest in Android development to deliver a high-performance and
+                        robust
+                        experience.
                     </p>
 
                     <ul>
-                        <li>linear</li>
-                        <li>Bézier</li>
-                        <li>circular</li>
-                        <li>other parametric paths</li>
+                        <li>
+                            UI Framework: The entire user interface is built declaratively with Jetpack Compose,
+                            enabling a dynamic and reactive UI that is both beautiful and efficient.
+                        </li>
+
+                        <li>
+                            Asynchronous Operations:
+                            Kotlin Coroutines are used throughout the app to manage background tasks, network
+                            operations, and
+                            animations, ensuring the UI remains smooth and responsive at all times.
+                        </li>
+
+                        <li>
+                            Architecture: The project
+                            adheres to the official MVVM (Model-View-ViewModel) architectural pattern, promoting a
+                            decoupled and
+                            testable codebase.
+                        </li>
+
+                        <li>
+                            Navigation: A structured and predictable user flow is managed by the Jetpack
+                            Navigation Component for Compose.
+                        </li>
+
+                        <li>
+                            Camera: Real-time video is handled by Jetpack CameraX, which
+                            simplifies camera implementation and ensures compatibility across a wide range of Android
+                            devices.
+                        </li>
+
+                        <li>
+                            Machine Learning: The app includes the Google ML Kit Object Detection library, laying the
+                            groundwork for future intelligent features like object tracking and autonomous functions.
+                        </li>
                     </ul>
-
-                    <p>
-                        Individual trajectories — or groups of trajectories — are executed by the
-                        <code>MotionController</code>.
-                    </p>
-
-                    <p>
-                        The <code>MotionController</code> is aware of speed, distance, and timing,
-                        and ensures smooth execution of motion. It can also apply
-                        <strong>easing functions</strong> to control acceleration and deceleration.
-                    </p>
-                </section>
-
-                <section aria-labelledby="remote-control">
-                    <h2 id="remote-control">Remote control layer</h2>
-
-                    <p>
-                        A dedicated remote control layer runs on a separate core of the CPU.
-                    </p>
-
-                    <p>
-                        This layer is responsible for:
-                    </p>
-
-                    <ul>
-                        <li>receiving data via Bluetooth</li>
-                        <li>parsing incoming commands</li>
-                        <li>forwarding structured commands to the main control core</li>
-                    </ul>
-
-                    <p>
-                        It includes modules such as <code>BluetoothController</code> and
-                        <code>CommandParser</code>, keeping communication concerns isolated from
-                        motion and control logic.
-                    </p>
-                </section>
-
-                <section aria-labelledby="extensibility">
-                    <h2 id="extensibility">Modularity and extensibility</h2>
-
-                    <p>
-                        This modular architecture makes it easy to integrate new features or
-                        sensors with minimal changes.
-                    </p>
-
-                    <p>
-                        The robot can be controlled not only by the Android app, but also by
-                        external systems such as:
-                    </p>
-
-                    <ul>
-                        <li>a different microcontroller</li>
-                        <li>scripted control systems</li>
-                        <li>AI-based controllers</li>
-                    </ul>
-                </section>
-
-                <section aria-labelledby="control-interface">
-                    <h2 id="control-interface">Control interface</h2>
-
-                    <p>
-                        A custom Android application is used to send high-level commands to the
-                        robot as structured strings. The robot parses these commands and executes
-                        them through its control system.
-                    </p>
-
-                    <p>
-                        Detailed documentation for the Android app is provided separately.
-                    </p>
-                </section>
-
-                <section aria-labelledby="hardware">
-                    <h2 id="hardware">Hardware configuration</h2>
-
-                    <ul>
-                        <li><strong>Microcontroller:</strong> ESP32-WROOM-32</li>
-                        <li><strong>Servo controller:</strong> PCA9685</li>
-                        <li><strong>Servos:</strong> DS Power 21G</li>
-                        <li><strong>Power:</strong> 2 × 3.7V Li-ion batteries</li>
-                        <li><strong>Servo power regulation:</strong> 20A buck converter</li>
-                        <li><strong>MCU power regulation:</strong> 3A buck converter</li>
-                    </ul>
-                </section>
-
-                <section aria-labelledby="closing">
-                    <h2 id="closing">Closing note</h2>
-
-                    <p>
-                        This project represents a system I am genuinely proud of — not because it
-                        is finished, but because it is <strong>well-structured, extensible, and
-                            grounded in fundamentals</strong>.
-                    </p>
-
-                    <p>
-                        It serves both as a functional robot and as a platform for continued
-                        learning and experimentation in robotics.
-                    </p>
                 </section>
             </div>
         </section>
