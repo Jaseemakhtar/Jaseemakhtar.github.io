@@ -3,6 +3,10 @@ nav {
   --bg-alpha: 0.3;
 }
 
+#projects {
+  margin-top: var(--nav-bar);
+}
+
 .section-header::before {
     display: none;
 }

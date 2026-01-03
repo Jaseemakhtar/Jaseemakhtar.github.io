@@ -47,6 +47,7 @@ nav {
 
 .selected-nav {
   color: #fff;
+  font-weight: 600;
 }
 
 .brand {
