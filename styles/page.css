@@ -1,6 +1,9 @@
-#about-me {
-    background-color: #11111196;
-    backdrop-filter: blur(2px);
+#about-me,
+#project-qr-m2,
+#project-led-matrix,
+#project-biped {
+    background-color: var(--page-bg);
+    backdrop-filter: blur(1px);
     margin-top: var(--nav-bar);
 }
 
@@ -83,16 +86,16 @@ nav {
 }
 
 .image-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
 }
 
 .image-grid img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
 }
 
 .image-grid figcaption {

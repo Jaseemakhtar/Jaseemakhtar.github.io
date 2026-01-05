@@ -4,6 +4,7 @@
   --project-item-gap: 2.2rem;
   --project-item-pad: 1.4rem;
   --nav-bar: 45px;
+  --page-bg: #111111ea;
 }
 
 * {
@@ -20,6 +21,12 @@ body {
   color: #ddd;
   font-family: 'Fira Code', 'JetBrains Mono', 'Inter', monospace;
   background-color: var(--primary-bg-color);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 nav {
@@ -144,7 +151,8 @@ nav ul {
   margin-bottom: 0.6rem;
 }
 
-.social-links>ul li a, .project-links a {
+.social-links>ul li a,
+.project-links a {
   display: block;
   padding: 0.5rem;
   color: #ddd;
@@ -192,14 +200,13 @@ main>section {
 }
 
 #hero {
-  height: 100dvh;
+  min-height: 100vh;
   position: relative;
   padding-inline: 2.6rem;
 }
 
 .hero-role {
   background-color: rgba(var(--primary-color), 0.3);
-  border-radius: 0.3rem;
   color: #fff;
   padding: 0.2rem 0.6rem;
   clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
@@ -218,6 +225,8 @@ main>section {
   justify-content: center;
   z-index: -1;
   font-size: 1.3rem;
+  position: fixed;
+  inset: 0;
 }
 
 .hero-right {
@@ -246,8 +255,8 @@ main>section {
 #projects,
 #about {
   min-height: 100dvh;
-  background-color: #11111196;
-  backdrop-filter: blur(2px);
+  background-color: var(--page-bg);
+  backdrop-filter: blur(4px);
 }
 
 .section-container {
@@ -297,10 +306,10 @@ main>section {
   display: block;
   width: 100%;
   height: auto;
-
   border-radius: inherit;
   position: relative;
   z-index: 1;
+  filter: grayscale(100%);
 }
 
 #about .section-content .profession {
@@ -502,7 +511,7 @@ footer {
   font-size: 0.9rem;
   padding-top: 10rem;
   padding-bottom: 2.4rem;
-  background-color: #11111196;
+  background-color: var(--page-bg);
   backdrop-filter: blur(2px);
 }
 
@@ -527,7 +536,7 @@ footer {
     width: 100%;
     padding-top: 10rem;
     padding-bottom: 1rem;
-    background-color: #11111196;
+    background-color: var(--page-bg);
     backdrop-filter: blur(2px);
   }
 
@@ -664,7 +673,8 @@ footer {
     transform: none;
   }
 
-  .social-links>ul li a, .project-links a {
+  .social-links>ul li a,
+  .project-links a {
     width: 34px;
   }
 
@@ -835,7 +845,8 @@ footer {
     transform: translate(2px, -2px);
   }
 
-  .social-links>ul li a:hover, .project-links a:hover {
+  .social-links>ul li a:hover,
+  .project-links a:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
   }
@@ -851,6 +862,7 @@ footer {
   outline-offset: 3px;
 }
 
-.social-links>ul li a:active, .project-links a:active {
+.social-links>ul li a:active,
+.project-links a:active {
   transform: translateY(1px) scale(0.98);
 }
