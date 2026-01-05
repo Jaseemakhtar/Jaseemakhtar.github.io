@@ -144,7 +144,7 @@ nav ul {
   margin-bottom: 0.6rem;
 }
 
-.social-links>ul li a {
+.social-links>ul li a, .project-links a {
   display: block;
   padding: 0.5rem;
   color: #ddd;
@@ -248,11 +248,6 @@ main>section {
   min-height: 100dvh;
   background-color: #11111196;
   backdrop-filter: blur(2px);
-}
-
-#projects .section-content ul a {
-  text-decoration: none;
-  color: inherit;
 }
 
 .section-container {
@@ -399,7 +394,6 @@ main>section {
 .project-item {
   display: flex;
   gap: 1.3rem;
-  cursor: pointer;
   margin-bottom: var(--project-item-gap);
   align-items: center;
   position: relative;
@@ -468,22 +462,35 @@ main>section {
   padding-bottom: 4rem;
 }
 
-#projects .section-content ul li:nth-child(even) .project-item {
+.project-item:nth-child(even) {
   flex-direction: row-reverse;
 }
 
-#projects .section-content ul li:nth-child(even) .project-item-summary {
+.project-item:nth-child(even) .project-item-summary {
   left: 0%;
   right: -10%;
 }
 
-#projects .section-content ul li:nth-child(even) .project-content {
+.project-item:nth-child(even) .project-content {
   text-align: start;
 }
 
-#projects .section-content ul li:nth-child(odd) .project-tags {
+.project-item:nth-child(odd) .project-tags {
   justify-content: end;
 }
+
+.project-links a {
+  display: inline-flex;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* .project-links svg {
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+  color: inherit;
+} */
 
 .hero-content h1 {
   font-size: 2rem;
@@ -622,7 +629,7 @@ footer {
     font-size: 1.2rem;
   }
 
-  #projects .section-content ul li:nth-child(2n) .project-item {
+  #projects .section-content ul li:nth-child(2n) {
     flex-direction: column;
   }
 
@@ -657,7 +664,7 @@ footer {
     transform: none;
   }
 
-  .social-links>ul li a {
+  .social-links>ul li a, .project-links a {
     width: 34px;
   }
 
@@ -828,7 +835,7 @@ footer {
     transform: translate(2px, -2px);
   }
 
-  .social-links>ul li a:hover {
+  .social-links>ul li a:hover, .project-links a:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
   }
@@ -844,6 +851,6 @@ footer {
   outline-offset: 3px;
 }
 
-.social-links>ul li a:active {
+.social-links>ul li a:active, .project-links a:active {
   transform: translateY(1px) scale(0.98);
 }

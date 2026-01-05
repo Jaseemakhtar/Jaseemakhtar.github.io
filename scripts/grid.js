@@ -4,8 +4,8 @@ window.onload = () => {
 
   const particlesLength = (window.innerWidth < 768) ? 20 : 40
 
-  let centerX, centerY, originX, originY;
-  let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+  let centerX = window.innerWidth / 2, centerY = window.innerHeight / 2, originX, originY;
+  let mouse = { x: 0, y: 0, targetX: centerX, targetY: window.innerHeight };
   let dpr = 1;
 
   window.addEventListener("resize", resize);
