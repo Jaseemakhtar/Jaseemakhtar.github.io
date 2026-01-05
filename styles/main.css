@@ -515,6 +515,49 @@ footer {
   backdrop-filter: blur(2px);
 }
 
+.integral-footer {
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.integral-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.integral-symbol {
+  font-size: 1.5em;
+  line-height: 1;
+  font-weight: normal;
+}
+
+.limits {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2px;
+  font-size: 0.7em;
+  line-height: 1;
+  gap: 12px;
+}
+
+.limit-lower-bound {
+  left: -6px;
+  position: relative;
+}
+
+.limit-upper-bound {}
+
+.math-var {
+  font-style: normal;
+}
+
+.copyright-footer {
+  margin-top: 20px;
+}
+
 @media (max-width: 768px) {
   .section-container {
     padding-inline: 2rem;
