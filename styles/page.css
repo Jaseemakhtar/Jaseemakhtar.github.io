@@ -68,7 +68,7 @@ figure.image:hover figcaption {
     margin-bottom: 16px;
 }
 
-.section-container section ul li{
+.section-container section ul li {
     margin-bottom: 8px;
     font-size: 1.06rem;
 }
@@ -78,8 +78,25 @@ figure.image:hover figcaption {
 }
 
 nav {
-  --blur: 2px;
-  --bg-alpha: 0.3;
+    --blur: 2px;
+    --bg-alpha: 0.3;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.image-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.image-grid figcaption {
+    display: none;
 }
 
 @media (max-width: 1080px) {

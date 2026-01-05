@@ -58,7 +58,56 @@
         <section id="project-led-matrix">
 
             <div class="section-container">
-                <h2 class="section-header">Led Matrix - Esp8266</h2>
+
+                <h2 class="section-header">LedMatrix Keychain</h2>
+                <figure class="video-block">
+                    <video autoplay muted controls loop playsinline preload="metadata"
+                        poster="../assets/images/proj_custom_pcb.jpg">
+                        <source src="../assets/videos/led_matrix_preview.webm" type="video/webm">
+                        <source src="../assets/videos/led_matrix_preview.mp4" type="video/mp4">
+
+                        Your browser does not support HTML5 video.
+                    </video>
+                </figure>
+
+                <section aria-labelledby="overview">
+                    <h2 id="overview">Overview</h2>
+
+                    <p>
+                        This is my first custom design PCB build, that I built after learning electronics and AVR
+                        <strong>mCUs</strong> (microcontrollers).
+                        After learning & experimenting with ATtiny45, ATmega328p, etc on breadboard. I wanted to build
+                        something compact on PCB. And with the love for SMD LEDs I came up with this idea of creating a
+                        LED matrix keychain with <strong>WiFi</strong> connectivity to update the text on the keychain.
+                    </p>
+
+                    <p>
+                        Overall it was fun and educational experience, and a beginning of something new!
+                    </p>
+                </section>
+
+                <section aria-labelledby="software-architecture">
+                    <h2 id="software-architecture">Software architecture</h2>
+
+                    <p>
+                        I'm using here Esp's FreeRTOS-SDK, so no Arduino.
+                    </p>
+
+                    <p>
+                        It was so fun writing the LED drivers all by myself from scratch!
+                    </p>
+                </section>
+
+                <section aria-labelledby="hardware">
+                    <h2 id="hardware">Hardware</h2>
+
+                    <ul>
+                        <li><strong>ESP8266</strong> </li>
+                        <li><strong>2 8-bit SIPO Shift Registers</strong> 74LS164</li>
+                        <li><strong>63 0805</strong> LEDs</li>
+                        <li><strong>FTDI for programming the mCU</strong></li>
+                    </ul>
+                </section>
             </div>
 
         </section>
