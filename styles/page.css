@@ -54,10 +54,21 @@ figure.image:hover figcaption {
     transform: translateY(0);
 }
 
-.section-container section h2 {
-    margin-top: 24px;
-    margin-bottom: 4px;
-    font-size: 1.2rem;
+.section-container>section {
+    margin-top: 2rem;
+}
+
+.lead-in {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.8em;
+    opacity: 0.16;
+}
+
+.lead-in::after {
+    content: '';
+    height: 1px;
+    background-color: #ddd;
 }
 
 .section-container section p {
