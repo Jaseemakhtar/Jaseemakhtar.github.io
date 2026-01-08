@@ -5,6 +5,7 @@
   --project-item-pad: 1.4rem;
   --nav-bar: 45px;
   --page-bg: #111111ea;
+  --nav-sel-trans: 6px
 }
 
 * {
@@ -42,19 +43,26 @@ nav {
   padding-top: 0.2rem;
   position: fixed;
   top: 0;
-  padding-inline: 0.8rem;
+  padding-inline-start: 0.8rem;
+  padding-inline-end: 1.2rem;
   align-items: center;
   z-index: 2;
   height: var(--nav-bar);
 }
 
-.selected-nav::before {
-  transform: scale(1);
+#selected-nav::before {
+  transform: translateX(calc(-1 * var(--nav-sel-trans)));
+  font-weight: 400;
 }
 
-.selected-nav {
+#selected-nav {
   color: #fff;
-  font-weight: 600;
+  font-weight: 500;
+}
+
+#selected-nav::after {
+  transform: translateX(var(--nav-sel-trans));
+  font-weight: 400;
 }
 
 .brand {
@@ -77,7 +85,7 @@ nav ul {
 }
 
 nav ul li {
-  margin-inline-start: 1.2rem;
+  margin-inline-start: 2rem;
 }
 
 nav ul li a {
@@ -91,25 +99,33 @@ nav ul li a {
 
 nav ul li a:hover {
   color: #fff;
+  font-weight: 500;
 }
 
 nav ul li a::before {
-  content: '';
   position: absolute;
-  width: 76%;
-  height: 1px;
-  background-color: #fff;
-  bottom: 4px;
   left: 0;
-  margin-left: 12%;
-  margin-right: 12%;
-  transform: scaleX(0);
+  content: '[';
+  transform-origin: bottom center;
+  transition: transform 200ms ease-out;
+}
+
+nav ul li a::after {
+  content: ']';
+  position: absolute;
+  right: 0;
   transform-origin: bottom center;
   transition: transform 200ms ease-out;
 }
 
 nav ul li a:hover::before {
-  transform: scaleX(1);
+  transform: translateX(calc(-1 * var(--nav-sel-trans)));
+  font-weight: 400;
+}
+
+nav ul li a:hover::after {
+  transform: translateX(var(--nav-sel-trans));
+  font-weight: 400;
 }
 
 main {
@@ -670,6 +686,10 @@ footer {
 }
 
 @media (max-width: 580px) {
+  :root {
+    --nav-sel-trans: 4px
+  }
+
   .hero-content h1 {
     font-size: 1.8rem;
   }
@@ -719,7 +739,9 @@ footer {
   }
 
   nav {
-    padding-inline: 0.2rem;
+    padding-top: 0.2rem;
+    padding-inline-start: 0.2rem;
+    padding-inline-end: 1rem;
   }
 
   nav ul li {
@@ -727,12 +749,7 @@ footer {
   }
 
   nav ul li a {
-    padding: 0.6rem 0.4rem;
-  }
-
-  nav {
-    padding-inline: 0.2rem;
-    padding-top: 0.2rem;
+    padding: 0.6rem 0.8rem;
   }
 
   .section-header {
@@ -772,8 +789,16 @@ footer {
 }
 
 @media (max-width: 420px) {
+  :root {
+    --nav-sel-trans: 3px
+  }
+
   nav ul li {
     margin-inline-start: 0.6rem;
+  }
+
+  nav ul li a {
+    padding: 0.6rem 0.6rem;
   }
 
   #hero {
@@ -850,11 +875,12 @@ footer {
   }
 
   nav ul li {
-    margin-inline-start: 0.2rem;
+    margin-inline-start: 0.4rem;
   }
 
   nav ul li a {
     font-size: 12px;
+    padding-inline: 7px;
   }
 
   #hero {
@@ -876,7 +902,11 @@ footer {
 
 @media (max-width: 340px) {
   nav ul li {
-    margin-inline-start: 0;
+    margin-inline-start: 0.4rem;
+  }
+
+  nav ul li a {
+    padding-inline: 5px;
   }
 }
 
