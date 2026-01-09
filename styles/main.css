@@ -230,6 +230,10 @@ main>section {
   text-align: center;
 }
 
+.hero-hobby {
+  text-align: center;
+}
+
 .hero-tagline {}
 
 .hero-content {
@@ -694,7 +698,7 @@ footer {
     font-size: 1.8rem;
   }
 
-  .hero-role {
+  .hero-role, .hero-hobby {
     font-size: 1.2rem;
   }
 
@@ -809,7 +813,7 @@ footer {
     font-size: 1.6rem;
   }
 
-  .hero-role {
+  .hero-role, .hero-hobby {
     font-size: 1rem;
   }
 
@@ -891,7 +895,7 @@ footer {
     font-size: 1.4rem;
   }
 
-  .hero-role {
+  .hero-role, .hero-hobby {
     font-size: 0.9rem;
   }
 
