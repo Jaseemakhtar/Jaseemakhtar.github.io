@@ -247,6 +247,8 @@ main>section {
   font-size: 1.3rem;
   position: fixed;
   inset: 0;
+  --scroll-scale: 1;
+  transform: scale(var(--scroll-scale));
 }
 
 .hero-right {
