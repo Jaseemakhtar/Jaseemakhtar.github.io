@@ -249,6 +249,7 @@ main>section {
   inset: 0;
   --scroll-scale: 1;
   transform: scale(var(--scroll-scale));
+  transform-origin: 50% 30%;
 }
 
 .hero-right {

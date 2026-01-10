@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
     const heroContent = document.querySelector('.hero-content')
 
     const scrollPast = (hero) ? hero.clientHeight : 360
-    const heroHeightHalf = hero.clientHeight / 2
+    const heroHeightHalf = hero.clientHeight * 0.6
 
     main.addEventListener('scroll', () => {
           const t = Math.min(main.scrollTop / scrollPast, 1);
