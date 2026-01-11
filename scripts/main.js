@@ -14,6 +14,6 @@ window.addEventListener('load', () => {
           nav.style.setProperty('--blur', `${t * 2}px`);
           nav.style.setProperty('--bg-alpha', 0.3 * t);
 
-        heroContent.style.setProperty('--scroll-scale', 1 - 0.2 * scrollScale)
+        heroContent.style.setProperty('--scroll-scale', 1 - 0.1 * scrollScale)
     });
 })
